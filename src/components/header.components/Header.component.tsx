@@ -9,6 +9,7 @@ export const Header = () => {
         <Link to={ROUTES.HOME}>Home</Link>
         <Link to={ROUTES.ABOUT}>About</Link>
         <Link to={ROUTES.REDUX_TEST}>Redux Test</Link>
+        <Link to={ROUTES.TODO_TEST}>Todo Test</Link>
       </nav>
     </header>
   );
