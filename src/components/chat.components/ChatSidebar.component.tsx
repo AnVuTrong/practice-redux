@@ -9,17 +9,28 @@ interface ChatSidebarProps {
   onChatSelect: (id: string) => void;
   onNewChat: () => void;
   onChatDelete: (id: string) => void;
+  isOpen: boolean;
+  isMobile: boolean;
 }
 
-export const ChatSidebar: React.FC<ChatSidebarProps> = ({ 
-  chatHistory, 
-  activeChatId, 
+export const ChatSidebar: React.FC<ChatSidebarProps> = ({
+  chatHistory,
+  activeChatId,
   onChatSelect,
   onNewChat,
-  onChatDelete
+  onChatDelete,
+  isOpen,
+  isMobile
 }) => {
+  const sidebarClasses = `
+    ${isMobile ? 'absolute' : 'relative'} 
+    ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+    transition-transform duration-300 ease-in-out
+    w-80 h-full bg-background-secondary border-r border-secondary z-10
+  `;
+
   return (
-    <div className="w-60 h-[calc(100vh-8rem)] bg-background-secondary border-r border-secondary">
+    <div className={sidebarClasses}>
       <ChatSidebarHeader 
         chatCount={chatHistory.length} 
         onNewChat={onNewChat} 
