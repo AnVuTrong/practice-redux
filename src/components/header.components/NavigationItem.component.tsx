@@ -20,12 +20,12 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
   return (
     <Link 
       to={path} 
-      className={`flex items-center gap-2 px-3 py-1.5 rounded transition-colors text-sm font-regular
+      className={`flex items-center gap-2 px-4 py-2 rounded transition-colors text-sm font-regular
         ${!isFirst && !isMobile ? 'ml-1' : ''}
         ${isMobile ? 'w-full' : ''}
         ${isActive 
-          ? 'bg-[#005f69] text-white hover:bg-[#004a54]' 
-          : 'bg-[#e5e7eb] text-black hover:bg-[#d7dadf] hover:text-[#005f69]'
+          ? 'bg-primary text-background-primary hover:bg-primary-light' 
+          : 'bg-secondary text-text-primary hover:bg-secondary-light hover:text-primary'
         }`}
       onClick={() => {
         if (isMobile && window.innerWidth < 768) {
@@ -40,7 +40,7 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
         viewBox="0 0 24 24" 
         strokeWidth="1.75" 
         stroke="currentColor" 
-        className={`w-5 h-5 ${isActive ? 'stroke-white' : 'stroke-[#005f69]'}`}
+        className={`w-5 h-5 ${isActive ? 'stroke-background-primary' : 'stroke-primary'}`}
       >
         <path strokeLinecap="round" strokeLinejoin="round" d={icon} />
       </svg>

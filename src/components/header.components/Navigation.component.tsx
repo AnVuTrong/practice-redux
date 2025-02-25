@@ -9,7 +9,7 @@ export const Navigation = () => {
     <div className="flex-1 flex justify-center">
       {/* Mobile Menu Button */}
       <button 
-        className="md:hidden p-2 text-[#005f69]"
+        className="md:hidden p-2 text-primary"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
         <svg 
@@ -32,7 +32,7 @@ export const Navigation = () => {
       </button>
 
       {/* Desktop Navigation */}
-      <div className="hidden md:flex bg-[#e5e7eb] rounded-lg">
+      <div className="hidden md:flex bg-secondary rounded-lg">
         {NAVIGATION_ITEMS.map((item, index) => (
           <NavigationItem 
             key={item.path} 

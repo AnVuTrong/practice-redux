@@ -7,6 +7,9 @@ const About = lazy(() => import('../pages/About.page'));
 const ReduxTest = lazy(() => import('../pages/ReduxTest.page'));
 const NotFound = lazy(() => import('../pages/NotFound.page'));
 const TodoTest = lazy(() => import('../pages/TodoTest.page'));
+const Chat = lazy(() => import('../pages/Chat.page'));
+const Agents = lazy(() => import('../pages/Agents.page'));
+const FileManager = lazy(() => import('../pages/FileManager.page'));
 
 export const Router = () => {
   return (
@@ -16,6 +19,9 @@ export const Router = () => {
         <Route path="/about" element={<About />} />
         <Route path="/redux-test" element={<ReduxTest />} />
         <Route path="/todo-test" element={<TodoTest />} />
+        <Route path="/chat" element={<Chat />} />
+        <Route path="/agents" element={<Agents />} />
+        <Route path="/file-manager" element={<FileManager />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>
