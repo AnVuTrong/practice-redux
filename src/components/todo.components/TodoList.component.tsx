@@ -4,15 +4,29 @@ import { addTodo, removeTodo, toggleTodo } from '../../features/todoSlice.featur
 
 export const TodoList = () => {
   const [newTodo, setNewTodo] = useState('');
-  const todos = useAppSelector((state) => state.todo.todos);
+  const todos = useAppSelector((state) => {
+    console.log('🔍 Selector: Reading current todos:', state.todo.todos);
+    return state.todo.todos;
+  });
   const dispatch = useAppDispatch();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (newTodo.trim()) {
+      console.log('🎯 Component: Adding new todo:', newTodo);
       dispatch(addTodo(newTodo));
       setNewTodo('');
     }
+  };
+
+  const handleToggle = (id: string) => {
+    console.log('🎯 Component: Toggling todo with id:', id);
+    dispatch(toggleTodo(id));
+  };
+
+  const handleRemove = (id: string) => {
+    console.log('🎯 Component: Removing todo with id:', id);
+    dispatch(removeTodo(id));
   };
 
   return (
@@ -44,14 +58,14 @@ export const TodoList = () => {
             <input
               type="checkbox"
               checked={todo.completed}
-              onChange={() => dispatch(toggleTodo(todo.id))}
+              onChange={() => handleToggle(todo.id)}
               className="h-5 w-5"
             />
             <span className={todo.completed ? 'line-through flex-1' : 'flex-1'}>
               {todo.text}
             </span>
             <button
-              onClick={() => dispatch(removeTodo(todo.id))}
+              onClick={() => handleRemove(todo.id)}
               className="text-red-500 hover:text-red-700"
             >
               Delete
