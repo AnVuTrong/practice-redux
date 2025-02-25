@@ -8,13 +8,15 @@ interface ChatSidebarProps {
   activeChatId: string | null;
   onChatSelect: (id: string) => void;
   onNewChat: () => void;
+  onChatDelete: (id: string) => void;
 }
 
 export const ChatSidebar: React.FC<ChatSidebarProps> = ({ 
   chatHistory, 
   activeChatId, 
   onChatSelect,
-  onNewChat
+  onNewChat,
+  onChatDelete
 }) => {
   return (
     <div className="w-60 h-[calc(100vh-8rem)] bg-background-secondary border-r border-secondary">
@@ -26,6 +28,7 @@ export const ChatSidebar: React.FC<ChatSidebarProps> = ({
         chatHistory={chatHistory}
         activeChatId={activeChatId}
         onChatSelect={onChatSelect}
+        onChatDelete={onChatDelete}
       />
     </div>
   );

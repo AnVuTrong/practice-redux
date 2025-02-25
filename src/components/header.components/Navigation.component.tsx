@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavigationItem } from './NavigationItem.component';
-import { NAVIGATION_ITEMS } from '../../constants/navigation.constant';
+import { NAVIGATION_ITEMS } from '../../constants/Navigation.constant';
 
 export const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

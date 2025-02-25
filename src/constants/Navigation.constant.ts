@@ -1,5 +1,5 @@
 import { NavigationItem } from '../types/navigation.types';
-import { ROUTES } from './routes.constant';
+import { ROUTES } from './Routes.constant';
 
 export const NAVIGATION_ITEMS: NavigationItem[] = [
 //   {

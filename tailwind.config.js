@@ -30,6 +30,12 @@ module.exports = {
           error: '#ef4444',
           warning: '#f59e0b',
           info: '#3b82f6',
+        },
+        highlight: {
+          red: '#ef4444',
+          green: '#10b981',
+          blue: '#3b82f6',
+          yellow: '#f59e0b',
         }
       }
     },
