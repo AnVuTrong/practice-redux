@@ -1,6 +1,6 @@
 import React from 'react';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
+import { Header } from '../components/header.components/Header.component';
+import { Footer } from '../components/footer.components/Footer.component';
 
 interface MainLayoutProps {
   children: React.ReactNode;
