@@ -1,46 +1,41 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ChatSidebar } from '../components/chat.components/ChatSidebar.component';
-import { ChatHistory } from '../types/chat.types';
-import { MOCK_CHAT_HISTORY } from '../constants/Chat.constant';
 import { ChatContent } from '../components/chat.components/ChatContent.component';
 import { useMobileDetect } from '../hooks/useMobileDetect.hook';
+import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
+import { setActiveChatId, toggleSidebar, addNewChat, deleteChat } from '../features/chatSlice.feature';
 
 const Chat = () => {
-  const [chatHistory, setChatHistory] = useState<ChatHistory[]>(MOCK_CHAT_HISTORY);
-  const [activeChatId, setActiveChatId] = useState<string | null>(null);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const dispatch = useAppDispatch();
+  const { chatHistory, activeChatId, isSidebarOpen } = useAppSelector(state => state.chat);
   const isMobile = useMobileDetect();
 
   const handleChatSelect = (id: string) => {
-    setActiveChatId(id);
+    dispatch(setActiveChatId(id));
     if (isMobile) {
-      setIsSidebarOpen(false);
+      dispatch(toggleSidebar());
     }
   };
 
   const handleNewChat = () => {
-    const newChat: ChatHistory = {
+    const newChat = {
       id: Date.now().toString(),
       title: 'New Chat',
       preview: 'Start a new conversation...',
       timestamp: new Date()
     };
-    setChatHistory([newChat, ...chatHistory]);
-    setActiveChatId(newChat.id);
+    dispatch(addNewChat(newChat));
     if (isMobile) {
-      setIsSidebarOpen(false);
+      dispatch(toggleSidebar());
     }
   };
 
   const handleDeleteChat = (id: string) => {
-    setChatHistory(chatHistory.filter(chat => chat.id !== id));
-    if (activeChatId === id) {
-      setActiveChatId(null);
-    }
+    dispatch(deleteChat(id));
   };
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
+  const handleToggleSidebar = () => {
+    dispatch(toggleSidebar());
   };
 
   return (
@@ -56,7 +51,7 @@ const Chat = () => {
       />
       <ChatContent
         activeChatId={activeChatId}
-        onToggleSidebar={toggleSidebar}
+        onToggleSidebar={handleToggleSidebar}
         isSidebarOpen={isSidebarOpen}
         isMobile={isMobile}
       />
