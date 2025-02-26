@@ -1,4 +1,8 @@
 import React from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux.hook';
+import { ChatMessage } from '../chat-content.components/ChatMessage.component';
+import { ChatInput } from '../chat-content.components/ChatInput.component';
+import { addMessage } from '../../features/chatSlice.feature';
 
 interface ChatContentProps {
   activeChatId: string | null;
@@ -13,6 +17,35 @@ export const ChatContent: React.FC<ChatContentProps> = ({
   isSidebarOpen,
   isMobile
 }) => {
+  const dispatch = useAppDispatch();
+  const activeChat = useAppSelector(state => 
+    activeChatId ? state.chat.chatSessions[activeChatId] : null
+  );
+
+  const handleSendMessage = (content: string) => {
+    if (!activeChatId) return;
+
+    const userMessage = {
+      id: Date.now().toString(),
+      content,
+      sender: 'user' as const,
+      timestamp: new Date()
+    };
+
+    dispatch(addMessage({ chatId: activeChatId, message: userMessage }));
+
+    // Simulate bot response
+    setTimeout(() => {
+      const botMessage = {
+        id: (Date.now() + 1).toString(),
+        content: 'This is a simulated bot response.',
+        sender: 'bot' as const,
+        timestamp: new Date()
+      };
+      dispatch(addMessage({ chatId: activeChatId, message: botMessage }));
+    }, 1000);
+  };
+
   return (
     <div className="flex-1 flex flex-col">
       <div className="flex items-center p-4 border-b border-secondary">
@@ -45,14 +78,17 @@ export const ChatContent: React.FC<ChatContentProps> = ({
           {activeChatId ? 'Chat Session' : 'Select or Start a New Chat'}
         </h1>
       </div>
+
       <div className="flex-1 p-4 overflow-y-auto">
-        {/* Chat messages will go here */}
-        <p className="text-text-secondary">
-          {activeChatId 
-            ? 'Chat content will appear here...' 
-            : 'Select a chat from the sidebar or start a new one to begin'}
-        </p>
+        {activeChat?.messages.map(message => (
+          <ChatMessage key={message.id} message={message} />
+        ))}
       </div>
+
+      <ChatInput 
+        onSendMessage={handleSendMessage}
+        disabled={!activeChatId}
+      />
     </div>
   );
 }; 

@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ChatHistory, AIAgent } from '../types/chat.types';
+import { ChatHistory, ChatSession, Message, AIAgent } from '../types/chat.types';
 import { MOCK_CHAT_HISTORY } from '../constants/Chat.constant';
 import { AI_AGENTS } from '../constants/Agents.constant';
 
 interface ChatState {
   chatHistory: ChatHistory[];
   activeChatId: string | null;
+  chatSessions: Record<string, ChatSession>;
   isSidebarOpen: boolean;
   isAgentSelectorOpen: boolean;
   selectedAgent: AIAgent | null;
@@ -14,6 +15,7 @@ interface ChatState {
 const initialState: ChatState = {
   chatHistory: MOCK_CHAT_HISTORY,
   activeChatId: null,
+  chatSessions: {},
   isSidebarOpen: true,
   isAgentSelectorOpen: false,
   selectedAgent: null
@@ -42,6 +44,15 @@ export const chatSlice = createSlice({
       state.chatHistory.unshift(action.payload);
       state.activeChatId = action.payload.id;
     },
+    addMessage: (state, action: PayloadAction<{ chatId: string; message: Message }>) => {
+      if (!state.chatSessions[action.payload.chatId]) {
+        state.chatSessions[action.payload.chatId] = {
+          id: action.payload.chatId,
+          messages: []
+        };
+      }
+      state.chatSessions[action.payload.chatId].messages.push(action.payload.message);
+    },
     addNewChatWithAgent: (state, action: PayloadAction<{agent: AIAgent}>) => {
       const newChat: ChatHistory = {
         id: Date.now().toString(),
@@ -50,6 +61,13 @@ export const chatSlice = createSlice({
         timestamp: new Date(),
         agentId: action.payload.agent.id
       };
+      
+      state.chatSessions[newChat.id] = {
+        id: newChat.id,
+        messages: [],
+        agentId: action.payload.agent.id
+      };
+      
       state.chatHistory.unshift(newChat);
       state.activeChatId = newChat.id;
       state.isAgentSelectorOpen = false;
@@ -72,6 +90,7 @@ export const {
   setSelectedAgent, 
   addNewChat, 
   addNewChatWithAgent, 
-  deleteChat 
+  deleteChat,
+  addMessage
 } = chatSlice.actions;
 export default chatSlice.reducer; 
