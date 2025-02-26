@@ -17,19 +17,6 @@ const Chat = () => {
     }
   };
 
-  const handleNewChat = () => {
-    const newChat = {
-      id: Date.now().toString(),
-      title: 'New Chat',
-      preview: 'Start a new conversation...',
-      timestamp: new Date()
-    };
-    dispatch(addNewChat(newChat));
-    if (isMobile) {
-      dispatch(toggleSidebar());
-    }
-  };
-
   const handleDeleteChat = (id: string) => {
     dispatch(deleteChat(id));
   };
@@ -44,7 +31,6 @@ const Chat = () => {
         chatHistory={chatHistory}
         activeChatId={activeChatId}
         onChatSelect={handleChatSelect}
-        onNewChat={handleNewChat}
         onChatDelete={handleDeleteChat}
         isOpen={isSidebarOpen}
         isMobile={isMobile}

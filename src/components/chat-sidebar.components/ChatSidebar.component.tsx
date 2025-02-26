@@ -7,7 +7,6 @@ interface ChatSidebarProps {
   chatHistory: ChatHistory[];
   activeChatId: string | null;
   onChatSelect: (id: string) => void;
-  onNewChat: () => void;
   onChatDelete: (id: string) => void;
   isOpen: boolean;
   isMobile: boolean;
@@ -17,7 +16,6 @@ export const ChatSidebar: React.FC<ChatSidebarProps> = ({
   chatHistory,
   activeChatId,
   onChatSelect,
-  onNewChat,
   onChatDelete,
   isOpen,
   isMobile
@@ -34,7 +32,6 @@ export const ChatSidebar: React.FC<ChatSidebarProps> = ({
     <div className={sidebarClasses}>
       <ChatSidebarHeader 
         chatCount={chatHistory.length} 
-        onNewChat={onNewChat} 
       />
       <ChatHistoryList 
         chatHistory={chatHistory}

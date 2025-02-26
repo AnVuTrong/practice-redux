@@ -1,24 +1,33 @@
 import React from 'react';
+import { useAppDispatch } from '../../hooks/redux.hook';
+import { toggleAgentSelector } from '../../features/chatSlice.feature';
+import { AgentSelector } from './AgentSelector.component';
 
 interface ChatSidebarHeaderProps {
   chatCount: number;
-  onNewChat: () => void;
 }
 
 export const ChatSidebarHeader: React.FC<ChatSidebarHeaderProps> = ({ 
-  chatCount, 
-  onNewChat 
+  chatCount
 }) => {
+  const dispatch = useAppDispatch();
+
+  const handleNewChat = () => {
+    dispatch(toggleAgentSelector());
+  };
+
   return (
-    <div className="flex justify-between items-center border-b m-5 -mb-1 pb-2 border-secondary -z-10">
+    <div className="flex justify-between items-center border-b m-5 pb-2 border-secondary relative">
       <h1 className="text-text-primary font-bold text-sm flex items-center p-1 my-auto justify-between">
         Lịch sử chat 
         <h2 className="ml-1.5 bg-secondary-dark text-text-secondary rounded-full w-5 h-5 flex items-center justify-center text-xs">
           {chatCount}
         </h2>
       </h1>
+
+      {/* New Chat Button */}
       <button 
-        onClick={onNewChat}
+        onClick={handleNewChat}
         className="w-4 h-4 bg-primary text-white rounded-full hover:bg-primary-light transition-colors flex items-center justify-center"
       >
         <svg 
@@ -30,6 +39,8 @@ export const ChatSidebarHeader: React.FC<ChatSidebarHeaderProps> = ({
           <path d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z" />
         </svg>
       </button>
+      
+      <AgentSelector />
     </div>
   );
 }; 
