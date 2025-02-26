@@ -19,15 +19,27 @@ export const ChatHistoryList: React.FC<ChatHistoryListProps> = ({
     <div className="h-[calc(100vh-10rem)] mt-0 p-5 flex-1 space-y-4 overflow-y-auto
       scrollbar-thin scrollbar-thumb-secondary-dark scrollbar-track-secondary/30
       hover:scrollbar-thumb-primary/50 transition-colors">
-      {chatHistory.map((chat) => (
-        <ChatHistoryItem
-          key={chat.id}
-          chat={chat}
-          isActive={chat.id === activeChatId}
-          onClick={onChatSelect}
-          onDelete={onChatDelete}
-        />
-      ))}
+      {chatHistory.length > 0 ? (
+        chatHistory.map((chat) => (
+          <ChatHistoryItem
+            key={chat.id}
+            chat={chat}
+            isActive={chat.id === activeChatId}
+            onClick={onChatSelect}
+            onDelete={onChatDelete}
+          />
+        ))
+      ) : (
+        <div className="text-center py-8 text-text-secondary">
+          <div className="flex justify-center items-center mb-2">
+            <span className="text-primary text-lg">
+              ↗️
+            </span>
+          </div>
+          <p>Chưa có cuộc trò chuyện nào.</p>
+          <p className="mt-2 text-sm">Nhấp vào nút + ở trên để chọn một nhân vật và bắt đầu trò chuyện!</p>
+        </div>
+      )}
     </div>
   );
 }; 

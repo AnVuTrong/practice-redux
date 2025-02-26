@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux.hook';
 import { ChatMessage } from '../chat-content.components/ChatMessage.component';
 import { ChatInput } from '../chat-content.components/ChatInput.component';
 import { addMessage } from '../../features/chatSlice.feature';
+import { AI_AGENTS } from '../../constants/Agents.constant';
 
 interface ChatContentProps {
   activeChatId: string | null;
@@ -21,6 +22,13 @@ export const ChatContent: React.FC<ChatContentProps> = ({
   const activeChat = useAppSelector(state => 
     activeChatId ? state.chat.chatSessions[activeChatId] : null
   );
+
+  // Get the agent name for the active chat
+  const agentName = React.useMemo(() => {
+    if (!activeChat?.agentId) return null;
+    const agent = AI_AGENTS.find(agent => agent.id === activeChat.agentId);
+    return agent?.name;
+  }, [activeChat?.agentId]);
 
   const handleSendMessage = (content: string) => {
     if (!activeChatId) return;
@@ -75,7 +83,9 @@ export const ChatContent: React.FC<ChatContentProps> = ({
           </button>
         )}
         <h1 className="text-xl font-bold text-primary">
-          {activeChatId ? 'Chat Session' : 'Select or Start a New Chat'}
+          {activeChatId 
+            ? (agentName || 'Unknown Agent') 
+            : 'Chọn hoặc bắt đầu một cuộc trò chuyện mới'}
         </h1>
       </div>
 

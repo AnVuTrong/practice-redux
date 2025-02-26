@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ChatHistory, ChatSession, Message, AIAgent } from '../types/chat.types';
-import { MOCK_CHAT_HISTORY } from '../constants/Chat.constant';
 import { AI_AGENTS } from '../constants/Agents.constant';
 
 interface ChatState {
@@ -13,11 +12,11 @@ interface ChatState {
 }
 
 const initialState: ChatState = {
-  chatHistory: MOCK_CHAT_HISTORY,
+  chatHistory: [],
   activeChatId: null,
   chatSessions: {},
   isSidebarOpen: true,
-  isAgentSelectorOpen: false,
+  isAgentSelectorOpen: true,
   selectedAgent: null
 };
 
