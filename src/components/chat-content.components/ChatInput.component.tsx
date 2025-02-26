@@ -24,7 +24,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, disabled })
           type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder={disabled ? 'Select a chat to start messaging...' : 'Type your message...'}
+          placeholder={disabled ? 'Chọn một cuộc trò chuyện để bắt đầu...' : 'Nhập tin nhắn của bạn...'}
           disabled={disabled}
           className="flex-1 p-2 rounded-lg border border-secondary bg-background-primary
             focus:outline-none focus:border-primary disabled:bg-secondary/30"

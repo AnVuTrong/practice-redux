@@ -19,7 +19,7 @@ export const SendButton: React.FC<SendButtonProps> = ({ disabled, onClick }) => 
           : 'bg-background-secondary text-primary hover:bg-primary hover:text-white hover:scale-110'
         }
       `}
-      title={disabled ? "Type a message first" : "Send message"}
+      title={disabled ? "Nhập tin nhắn của bạn" : "Gửi tin nhắn"}
     >
       <svg 
         xmlns="http://www.w3.org/2000/svg" 
