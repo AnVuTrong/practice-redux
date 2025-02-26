@@ -1,6 +1,6 @@
 import React from 'react';
-import { ChatSidebar } from '../components/chat.components/ChatSidebar.component';
-import { ChatContent } from '../components/chat.components/ChatContent.component';
+import { ChatSidebar } from '../components/chat-sidebar.components/ChatSidebar.component';
+import { ChatContent } from '../components/chat-sidebar.components/ChatContent.component';
 import { useMobileDetect } from '../hooks/useMobileDetect.hook';
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
 import { setActiveChatId, toggleSidebar, addNewChat, deleteChat } from '../features/chatSlice.feature';
@@ -49,6 +49,7 @@ const Chat = () => {
         isOpen={isSidebarOpen}
         isMobile={isMobile}
       />
+      
       <ChatContent
         activeChatId={activeChatId}
         onToggleSidebar={handleToggleSidebar}

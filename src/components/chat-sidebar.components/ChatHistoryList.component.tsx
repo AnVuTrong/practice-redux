@@ -16,7 +16,9 @@ export const ChatHistoryList: React.FC<ChatHistoryListProps> = ({
   onChatDelete
 }) => {
   return (
-    <div className="overflow-y-auto h-[calc(100%-4rem)] p-2">
+    <div className="h-[calc(100vh-10rem)] p-5 flex-1 space-y-4 overflow-y-auto
+      scrollbar-thin scrollbar-thumb-secondary-dark scrollbar-track-secondary/30
+      hover:scrollbar-thumb-primary/50 transition-colors">
       {chatHistory.map((chat) => (
         <ChatHistoryItem
           key={chat.id}

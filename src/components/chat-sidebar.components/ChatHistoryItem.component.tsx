@@ -24,11 +24,11 @@ export const ChatHistoryItem: React.FC<ChatHistoryItemProps> = ({
       ${isActive ? 'bg-secondary' : 'bg-background-secondary'} group`}>
       <button
         onClick={() => onClick(chat.id)}
-        className="w-full text-left p-4 hover:bg-secondary/50 transition-colors duration-200"
+        className="w-full text-left p-5 hover:bg-secondary/50 transition-colors duration-200"
       >
         <div className="flex justify-between items-start relative">
           <div className="flex-1 min-w-0">
-            <h3 className="font-medium text-primary truncate">{chat.title}</h3>
+            <h1 className="font-bold text-primary truncate">{chat.title}</h1>
             <p className="text-sm text-text-secondary truncate mt-1">{chat.preview}</p>
           </div>
           <button

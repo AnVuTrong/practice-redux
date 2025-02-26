@@ -26,7 +26,8 @@ export const ChatSidebar: React.FC<ChatSidebarProps> = ({
     ${isMobile ? 'absolute' : 'relative'} 
     ${isOpen ? 'translate-x-0' : '-translate-x-full'}
     transition-transform duration-300 ease-in-out
-    w-80 h-full bg-background-secondary border-r border-secondary z-10
+    w-80 h-full bg-background-secondary border-r border-secondary
+    shadow-lg
   `;
 
   return (

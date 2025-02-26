@@ -10,13 +10,13 @@ export const ChatSidebarHeader: React.FC<ChatSidebarHeaderProps> = ({
   onNewChat 
 }) => {
   return (
-    <div className="p-4 border-b border-secondary flex justify-between items-center">
-      <span className="text-text-primary font-bold text-sm flex items-center">
+    <div className="flex justify-between items-center border-b m-5 -mb-1 pb-2 border-secondary -z-10">
+      <h1 className="text-text-primary font-bold text-sm flex items-center p-1 my-auto justify-between">
         Lịch sử chat 
         <h2 className="ml-1.5 bg-secondary-dark text-text-secondary rounded-full w-5 h-5 flex items-center justify-center text-xs">
           {chatCount}
         </h2>
-      </span>
+      </h1>
       <button 
         onClick={onNewChat}
         className="w-4 h-4 bg-primary text-white rounded-full hover:bg-primary-light transition-colors flex items-center justify-center"
