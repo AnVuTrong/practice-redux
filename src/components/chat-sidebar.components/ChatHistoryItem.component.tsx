@@ -20,12 +20,12 @@ export const ChatHistoryItem: React.FC<ChatHistoryItemProps> = ({
   };
 
   return (
-    <div className={`w-full bg-secondary-light rounded-lg mb-2 overflow-hidden
-      ${isActive ? 'bg-secondary' : 'bg-background-secondary'} group`}>
-      <button
-        onClick={() => onClick(chat.id)}
-        className="w-full text-left p-5 hover:bg-secondary/50 transition-colors duration-200"
-      >
+    <div 
+      className={`w-full bg-secondary-light rounded-lg mb-2 overflow-hidden
+        ${isActive ? 'bg-secondary' : 'bg-background-secondary'} group cursor-pointer`}
+      onClick={() => onClick(chat.id)}
+    >
+      <div className="w-full text-left p-5 hover:bg-secondary/50 transition-colors duration-200">
         <div className="flex justify-between items-start relative">
           <div className="flex-1 min-w-0">
             <h1 className="font-bold text-primary truncate">{chat.title}</h1>
@@ -52,7 +52,7 @@ export const ChatHistoryItem: React.FC<ChatHistoryItemProps> = ({
             </svg>
           </button>
         </div>
-      </button>
+      </div>
     </div>
   );
 }; 

@@ -57,7 +57,7 @@ export const chatSlice = createSlice({
         id: Date.now().toString(),
         title: `New Chat with ${action.payload.agent.name}`,
         preview: 'Start a new conversation...',
-        timestamp: new Date(),
+        timestamp: new Date().toISOString(),
         agentId: action.payload.agent.id
       };
       

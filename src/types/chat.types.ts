@@ -8,7 +8,7 @@ export interface AIAgent {
 export interface ChatHistory {
   id: string;
   title: string;
-  timestamp: Date;
+  timestamp: string;
   preview: string;
   agentId?: string;
 }
@@ -17,7 +17,7 @@ export interface Message {
   id: string;
   content: string;
   sender: 'user' | 'bot';
-  timestamp: Date;
+  timestamp: string;
 }
 
 export interface ChatSession {

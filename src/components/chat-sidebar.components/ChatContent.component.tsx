@@ -37,7 +37,7 @@ export const ChatContent: React.FC<ChatContentProps> = ({
       id: Date.now().toString(),
       content,
       sender: 'user' as const,
-      timestamp: new Date()
+      timestamp: new Date().toISOString()
     };
 
     dispatch(addMessage({ chatId: activeChatId, message: userMessage }));
@@ -48,7 +48,7 @@ export const ChatContent: React.FC<ChatContentProps> = ({
         id: (Date.now() + 1).toString(),
         content: 'This is a simulated bot response.',
         sender: 'bot' as const,
-        timestamp: new Date()
+        timestamp: new Date().toISOString()
       };
       dispatch(addMessage({ chatId: activeChatId, message: botMessage }));
     }, 1000);
