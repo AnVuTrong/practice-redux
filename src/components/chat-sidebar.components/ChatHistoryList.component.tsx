@@ -16,7 +16,7 @@ export const ChatHistoryList: React.FC<ChatHistoryListProps> = ({
   onChatDelete
 }) => {
   return (
-    <div className="h-[calc(100vh-10rem)] mt-0 p-5 flex-1 space-y-4 overflow-y-auto
+    <div className="p-5 space-y-4 h-full overflow-y-auto
       scrollbar-thin scrollbar-thumb-secondary-dark scrollbar-track-secondary/30
       hover:scrollbar-thumb-primary/50 transition-colors">
       {chatHistory.length > 0 ? (

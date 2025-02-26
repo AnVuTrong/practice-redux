@@ -21,24 +21,28 @@ export const ChatSidebar: React.FC<ChatSidebarProps> = ({
   isMobile
 }) => {
   const sidebarClasses = `
-    ${isMobile ? 'absolute' : 'relative'} 
+    ${isMobile ? 'fixed inset-y-0 left-0 w-full md:w-80 top-16' : 'relative w-80'} 
     ${isOpen ? 'translate-x-0' : '-translate-x-full'}
     transition-transform duration-300 ease-in-out
-    w-80 h-full bg-background-secondary border-r border-secondary
-    shadow-lg
+    bg-background-secondary border-r border-secondary
+    shadow-lg z-40 flex flex-col
   `;
 
   return (
     <div className={sidebarClasses}>
-      <ChatSidebarHeader 
-        chatCount={chatHistory.length} 
-      />
-      <ChatHistoryList 
-        chatHistory={chatHistory}
-        activeChatId={activeChatId}
-        onChatSelect={onChatSelect}
-        onChatDelete={onChatDelete}
-      />
+      <div className="flex-none">
+        <ChatSidebarHeader 
+          chatCount={chatHistory.length} 
+        />
+      </div>
+      <div className="flex-1 overflow-y-auto">
+        <ChatHistoryList 
+          chatHistory={chatHistory}
+          activeChatId={activeChatId}
+          onChatSelect={onChatSelect}
+          onChatDelete={onChatDelete}
+        />
+      </div>
     </div>
   );
 }; 

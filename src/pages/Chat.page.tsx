@@ -3,7 +3,7 @@ import { ChatSidebar } from '../components/chat-sidebar.components/ChatSidebar.c
 import { ChatContent } from '../components/chat-sidebar.components/ChatContent.component';
 import { useMobileDetect } from '../hooks/useMobileDetect.hook';
 import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
-import { setActiveChatId, toggleSidebar, addNewChat, deleteChat } from '../features/chatSlice.feature';
+import { setActiveChatId, toggleSidebar, deleteChat } from '../features/chatSlice.feature';
 
 const Chat = () => {
   const dispatch = useAppDispatch();
@@ -26,7 +26,7 @@ const Chat = () => {
   };
 
   return (
-    <div className="flex h-[calc(100vh-4rem)] relative">
+    <div className="flex h-[calc(100vh-8rem)] relative">
       <ChatSidebar
         chatHistory={chatHistory}
         activeChatId={activeChatId}
