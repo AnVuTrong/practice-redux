@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
 import { ActionButton } from './ActionButton.component';
+import { ReferencesModal } from './ReferencesModal.component';
+import { getReferencesForMessage } from '../../services/references.service';
 
 interface MessageActionsProps {
   onCopy: () => void;
   onEdit: () => void;
+  messageId: string;
 }
 
-export const MessageActions: React.FC<MessageActionsProps> = ({ onCopy, onEdit }) => {
+export const MessageActions: React.FC<MessageActionsProps> = ({ onCopy, onEdit, messageId }) => {
   const [showTooltip, setShowTooltip] = useState<string | null>(null);
+  const [isReferencesModalOpen, setIsReferencesModalOpen] = useState(false);
+  
+  const handleReferencesClick = () => {
+    setIsReferencesModalOpen(true);
+  };
   
   const actions = [
     {
@@ -26,7 +34,7 @@ export const MessageActions: React.FC<MessageActionsProps> = ({ onCopy, onEdit }
       id: 'references',
       tooltip: 'Xem tài liệu tham khảo',
       icon: 'M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z',
-      onClick: () => console.log('References clicked')
+      onClick: handleReferencesClick
     },
     {
       id: 'rate',
@@ -37,19 +45,27 @@ export const MessageActions: React.FC<MessageActionsProps> = ({ onCopy, onEdit }
   ];
 
   return (
-    <div className="absolute bottom-1 right-1 flex space-x-1">
-      {actions.map(action => (
-        <ActionButton
-          key={action.id}
-          icon={action.icon}
-          tooltip={action.tooltip}
-          onClick={action.onClick}
-          onMouseEnter={() => setShowTooltip(action.id)}
-          onMouseLeave={() => setShowTooltip(null)}
-          showTooltip={showTooltip === action.id}
-          actionType={action.id}
-        />
-      ))}
-    </div>
+    <>
+      <div className="absolute bottom-1 right-1 flex space-x-1">
+        {actions.map(action => (
+          <ActionButton
+            key={action.id}
+            icon={action.icon}
+            tooltip={action.tooltip}
+            onClick={action.onClick}
+            onMouseEnter={() => setShowTooltip(action.id)}
+            onMouseLeave={() => setShowTooltip(null)}
+            showTooltip={showTooltip === action.id}
+            actionType={action.id}
+          />
+        ))}
+      </div>
+      
+      <ReferencesModal
+        isOpen={isReferencesModalOpen}
+        onClose={() => setIsReferencesModalOpen(false)}
+        documents={getReferencesForMessage(messageId)}
+      />
+    </>
   );
 }; 

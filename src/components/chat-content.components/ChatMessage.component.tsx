@@ -64,7 +64,8 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message, chatId }) => 
         {isBot && !isEditing && (
           <MessageActions 
             onCopy={handleCopyContent} 
-            onEdit={handleEditClick} 
+            onEdit={handleEditClick}
+            messageId={message.id}
           />
         )}
       </div>
