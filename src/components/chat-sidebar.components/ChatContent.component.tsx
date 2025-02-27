@@ -55,8 +55,8 @@ export const ChatContent: React.FC<ChatContentProps> = ({
   };
 
   return (
-    <div className="flex-1 flex flex-col">
-      <div className="flex items-center p-4 border-b border-secondary">
+    <div className="flex-1 flex flex-col h-full">
+      <div className="flex-none p-4 border-b border-secondary">
         {isMobile && (
           <button
             onClick={onToggleSidebar}
@@ -89,16 +89,18 @@ export const ChatContent: React.FC<ChatContentProps> = ({
         </h1>
       </div>
 
-      <div className="flex-1 p-4 overflow-y-auto">
+      <div className="flex-1 p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-secondary-dark scrollbar-track-transparent hover:scrollbar-thumb-primary/50 transition-colors">
         {activeChat?.messages.map(message => (
           <ChatMessage key={message.id} message={message} />
         ))}
       </div>
 
-      <ChatInput 
-        onSendMessage={handleSendMessage}
-        disabled={!activeChatId}
-      />
+      <div className="flex-none">
+        <ChatInput 
+          onSendMessage={handleSendMessage}
+          disabled={!activeChatId}
+        />
+      </div>
     </div>
   );
 }; 

@@ -25,17 +25,17 @@ export const ChatSidebar: React.FC<ChatSidebarProps> = ({
     ${isOpen ? 'translate-x-0' : '-translate-x-full'}
     transition-transform duration-300 ease-in-out
     bg-background-secondary border-r border-secondary
-    shadow-lg z-40 flex flex-col
+    shadow-lg z-40 flex flex-col h-full
   `;
 
   return (
     <div className={sidebarClasses}>
-      <div>
+      <div className="flex-none">
         <ChatSidebarHeader 
           chatCount={chatHistory.length} 
         />
       </div>
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-secondary-dark scrollbar-track-transparent hover:scrollbar-thumb-primary/50 transition-colors">
         <ChatHistoryList 
           chatHistory={chatHistory}
           activeChatId={activeChatId}
