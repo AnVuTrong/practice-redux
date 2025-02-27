@@ -51,9 +51,9 @@ export const chatSlice = createSlice({
         };
       }
       state.chatSessions[action.payload.chatId].messages.push(action.payload.message);
-      
+
       // Update the chat history preview with the latest message content
-      const chatHistoryItem = state.chatHistory.find(chat => chat.id === action.payload.chatId);
+      const chatHistoryItem = state.chatHistory.find((chat) => chat.id === action.payload.chatId);
       if (chatHistoryItem) {
         // If it's a user message, update the preview
         if (action.payload.message.sender === 'user') {
@@ -61,7 +61,7 @@ export const chatSlice = createSlice({
         }
       }
     },
-    addNewChatWithAgent: (state, action: PayloadAction<{agent: AIAgent}>) => {
+    addNewChatWithAgent: (state, action: PayloadAction<{ agent: AIAgent }>) => {
       const newChat: ChatHistory = {
         id: Date.now().toString(),
         title: `${action.payload.agent.name}`,
@@ -69,34 +69,34 @@ export const chatSlice = createSlice({
         timestamp: new Date().toISOString(),
         agentId: action.payload.agent.id
       };
-      
+
       state.chatSessions[newChat.id] = {
         id: newChat.id,
         messages: [],
         agentId: action.payload.agent.id
       };
-      
+
       state.chatHistory.unshift(newChat);
       state.activeChatId = newChat.id;
       state.isAgentSelectorOpen = false;
       state.selectedAgent = null;
     },
     deleteChat: (state, action: PayloadAction<string>) => {
-      state.chatHistory = state.chatHistory.filter(chat => chat.id !== action.payload);
+      state.chatHistory = state.chatHistory.filter((chat) => chat.id !== action.payload);
       if (state.activeChatId === action.payload) {
         state.activeChatId = null;
       }
     },
     updateMessage: (state, action: PayloadAction<{ chatId: string; messageId: string; content: string }>) => {
       const { chatId, messageId, content } = action.payload;
-      
+
       if (state.chatSessions[chatId]) {
-        const message = state.chatSessions[chatId].messages.find(msg => msg.id === messageId);
+        const message = state.chatSessions[chatId].messages.find((msg) => msg.id === messageId);
         if (message) {
           message.content = content;
-          
+
           // If this is the first message in the chat, update the preview as well
-          const chatHistoryItem = state.chatHistory.find(chat => chat.id === chatId);
+          const chatHistoryItem = state.chatHistory.find((chat) => chat.id === chatId);
           if (chatHistoryItem && state.chatSessions[chatId].messages[0]?.id === messageId) {
             chatHistoryItem.preview = content;
           }
@@ -106,16 +106,16 @@ export const chatSlice = createSlice({
   }
 });
 
-export const { 
-  setChatHistory, 
-  setActiveChatId, 
-  toggleSidebar, 
-  toggleAgentSelector, 
-  setSelectedAgent, 
-  addNewChat, 
-  addNewChatWithAgent, 
+export const {
+  setChatHistory,
+  setActiveChatId,
+  toggleSidebar,
+  toggleAgentSelector,
+  setSelectedAgent,
+  addNewChat,
+  addNewChatWithAgent,
   deleteChat,
   addMessage,
   updateMessage
 } = chatSlice.actions;
-export default chatSlice.reducer; 
+export default chatSlice.reducer;

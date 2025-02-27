@@ -16,16 +16,11 @@ interface ChatContentProps {
   isMobile: boolean;
 }
 
-export const ChatContent: React.FC<ChatContentProps> = ({
-  activeChatId,
-  onToggleSidebar,
-  isSidebarOpen,
-  isMobile
-}) => {
+export const ChatContent: React.FC<ChatContentProps> = ({ activeChatId, onToggleSidebar, isSidebarOpen, isMobile }) => {
   const { activeChat, agentName, handleSendMessage } = useChatContent(activeChatId);
 
   return (
-    <div className="flex-1 flex flex-col h-full">
+    <div className='flex-1 flex flex-col h-full'>
       {/* <ChatHeader 
         agentName={agentName || null} 
         activeChatId={activeChatId}
@@ -34,17 +29,11 @@ export const ChatContent: React.FC<ChatContentProps> = ({
         onToggleSidebar={onToggleSidebar}
       /> */}
 
-      <div className="flex-1 overflow-y-auto">
-        <ChatMessageList 
-          messages={activeChat?.messages || []} 
-          chatId={activeChatId}
-        />
+      <div className='flex-1 overflow-y-auto'>
+        <ChatMessageList messages={activeChat?.messages || []} chatId={activeChatId} />
       </div>
 
-      <ChatInput 
-        onSendMessage={handleSendMessage}
-        disabled={!activeChatId}
-      />
+      <ChatInput onSendMessage={handleSendMessage} disabled={!activeChatId} />
     </div>
   );
-}; 
+};

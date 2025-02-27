@@ -45,7 +45,7 @@ export const userSlice = createSlice({
     updateUserProfile: (state, action: PayloadAction<Partial<User>>) => {
       if (state.currentUser) {
         state.currentUser = { ...state.currentUser, ...action.payload };
-        
+
         // Save to localStorage for persistence
         localStorage.setItem('user', JSON.stringify(state.currentUser));
       }
@@ -57,4 +57,4 @@ export const userSlice = createSlice({
 });
 
 export const { setUser, clearUser, updateUserProfile, setLoading } = userSlice.actions;
-export default userSlice.reducer; 
+export default userSlice.reducer;

@@ -30,44 +30,28 @@ export const TodoList = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 max-w-md">
-      <form onSubmit={handleSubmit} className="mb-4">
-        <div className="flex gap-2">
+    <div className='container mx-auto p-4 max-w-md'>
+      <form onSubmit={handleSubmit} className='mb-4'>
+        <div className='flex gap-2'>
           <input
-            type="text"
+            type='text'
             value={newTodo}
             onChange={(e) => setNewTodo(e.target.value)}
-            className="flex-1 px-3 py-2 border rounded"
-            placeholder="Add new todo..."
+            className='flex-1 px-3 py-2 border rounded'
+            placeholder='Add new todo...'
           />
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-          >
+          <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600'>
             Add
           </button>
         </div>
       </form>
 
-      <ul className="space-y-2">
+      <ul className='space-y-2'>
         {todos.map((todo) => (
-          <li
-            key={todo.id}
-            className="flex items-center gap-2 p-2 border rounded"
-          >
-            <input
-              type="checkbox"
-              checked={todo.completed}
-              onChange={() => handleToggle(todo.id)}
-              className="h-5 w-5"
-            />
-            <span className={todo.completed ? 'line-through flex-1' : 'flex-1'}>
-              {todo.text}
-            </span>
-            <button
-              onClick={() => handleRemove(todo.id)}
-              className="text-red-500 hover:text-red-700"
-            >
+          <li key={todo.id} className='flex items-center gap-2 p-2 border rounded'>
+            <input type='checkbox' checked={todo.completed} onChange={() => handleToggle(todo.id)} className='h-5 w-5' />
+            <span className={todo.completed ? 'line-through flex-1' : 'flex-1'}>{todo.text}</span>
+            <button onClick={() => handleRemove(todo.id)} className='text-red-500 hover:text-red-700'>
               Delete
             </button>
           </li>
@@ -75,4 +59,4 @@ export const TodoList = () => {
       </ul>
     </div>
   );
-}; 
+};

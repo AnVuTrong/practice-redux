@@ -30,12 +30,12 @@ export const todoSlice = createSlice({
     },
     removeTodo: (state, action: PayloadAction<string>) => {
       console.log('🔵 Reducer: Removing todo with id:', action.payload);
-      state.todos = state.todos.filter(todo => todo.id !== action.payload);
+      state.todos = state.todos.filter((todo) => todo.id !== action.payload);
       console.log('✅ Reducer: Updated todos list:', state.todos);
     },
     toggleTodo: (state, action: PayloadAction<string>) => {
       console.log('🔵 Reducer: Toggling todo with id:', action.payload);
-      const todo = state.todos.find(todo => todo.id === action.payload);
+      const todo = state.todos.find((todo) => todo.id === action.payload);
       if (todo) {
         todo.completed = !todo.completed;
         console.log('✅ Reducer: Todo updated:', todo);
@@ -45,4 +45,4 @@ export const todoSlice = createSlice({
 });
 
 export const { addTodo, removeTodo, toggleTodo } = todoSlice.actions;
-export default todoSlice.reducer; 
+export default todoSlice.reducer;

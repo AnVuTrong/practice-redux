@@ -30,4 +30,4 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   }, [dispatch]);
 
   return <>{children}</>;
-}; 
+};

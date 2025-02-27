@@ -26,52 +26,76 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
 
 export const Router = () => {
   return (
-    <Suspense fallback={<div className="flex items-center justify-center h-full">Loading...</div>}>
+    <Suspense fallback={<div className='flex items-center justify-center h-full'>Loading...</div>}>
       <Routes>
         {/* Protected routes */}
-        <Route path="/" element={
-          <ProtectedRoute>
-            <Home />
-          </ProtectedRoute>
-        } />
-        <Route path="/about" element={
-          <ProtectedRoute>
-            <About />
-          </ProtectedRoute>
-        } />
-        <Route path="/redux-test" element={
-          <ProtectedRoute>
-            <ReduxTest />
-          </ProtectedRoute>
-        } />
-        <Route path="/todo-test" element={
-          <ProtectedRoute>
-            <TodoTest />
-          </ProtectedRoute>
-        } />
-        <Route path="/chat" element={
-          <ProtectedRoute>
-            <Chat />
-          </ProtectedRoute>
-        } />
-        <Route path="/agents" element={
-          <ProtectedRoute>
-            <Agents />
-          </ProtectedRoute>
-        } />
-        <Route path="/file-manager" element={
-          <ProtectedRoute>
-            <FileManager />
-          </ProtectedRoute>
-        } />
-        <Route path="/settings" element={
-          <ProtectedRoute>
-            <Settings />
-          </ProtectedRoute>
-        } />
-        
+        <Route
+          path='/'
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/about'
+          element={
+            <ProtectedRoute>
+              <About />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/redux-test'
+          element={
+            <ProtectedRoute>
+              <ReduxTest />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/todo-test'
+          element={
+            <ProtectedRoute>
+              <TodoTest />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/chat'
+          element={
+            <ProtectedRoute>
+              <Chat />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/agents'
+          element={
+            <ProtectedRoute>
+              <Agents />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/file-manager'
+          element={
+            <ProtectedRoute>
+              <FileManager />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/settings'
+          element={
+            <ProtectedRoute>
+              <Settings />
+            </ProtectedRoute>
+          }
+        />
+
         {/* 404 route */}
-        <Route path="*" element={<NotFound />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </Suspense>
   );

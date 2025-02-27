@@ -12,21 +12,11 @@ interface FormInputProps {
   autoComplete?: string;
 }
 
-export const FormInput: React.FC<FormInputProps> = ({
-  id,
-  label,
-  type,
-  value,
-  onChange,
-  placeholder,
-  error,
-  required = false,
-  autoComplete
-}) => {
+export const FormInput: React.FC<FormInputProps> = ({ id, label, type, value, onChange, placeholder, error, required = false, autoComplete }) => {
   return (
-    <div className="mb-4">
-      <label htmlFor={id} className="block text-sm font-medium text-gray-700 mb-1">
-        {label} {required && <span className="text-red-500">*</span>}
+    <div className='mb-4'>
+      <label htmlFor={id} className='block text-sm font-medium text-gray-700 mb-1'>
+        {label} {required && <span className='text-red-500'>*</span>}
       </label>
       <input
         id={id}
@@ -41,7 +31,7 @@ export const FormInput: React.FC<FormInputProps> = ({
           error ? 'border-red-500' : 'border-gray-300'
         } focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200`}
       />
-      {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
+      {error && <p className='mt-1 text-sm text-red-500'>{error}</p>}
     </div>
   );
-}; 
+};

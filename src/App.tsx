@@ -17,8 +17,8 @@ const AppLayout = () => {
     <>
       {isAuthPage ? (
         <Routes>
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path='/signin' element={<SignIn />} />
+          <Route path='/signup' element={<SignUp />} />
         </Routes>
       ) : (
         <MainLayout>

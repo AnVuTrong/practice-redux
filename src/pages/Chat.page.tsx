@@ -7,7 +7,7 @@ import { setActiveChatId, toggleSidebar, deleteChat } from '../features/chatSlic
 
 const Chat = () => {
   const dispatch = useAppDispatch();
-  const { chatHistory, activeChatId, isSidebarOpen } = useAppSelector(state => state.chat);
+  const { chatHistory, activeChatId, isSidebarOpen } = useAppSelector((state) => state.chat);
   const isMobile = useMobileDetect();
 
   const handleChatSelect = (id: string) => {
@@ -26,7 +26,7 @@ const Chat = () => {
   };
 
   return (
-    <div className="flex flex-1 w-full">
+    <div className='flex flex-1 w-full'>
       <ChatSidebar
         chatHistory={chatHistory}
         activeChatId={activeChatId}
@@ -35,15 +35,10 @@ const Chat = () => {
         isOpen={isSidebarOpen}
         isMobile={isMobile}
       />
-      
-      <ChatContent
-        activeChatId={activeChatId}
-        onToggleSidebar={handleToggleSidebar}
-        isSidebarOpen={isSidebarOpen}
-        isMobile={isMobile}
-      />
+
+      <ChatContent activeChatId={activeChatId} onToggleSidebar={handleToggleSidebar} isSidebarOpen={isSidebarOpen} isMobile={isMobile} />
     </div>
   );
 };
 
-export default Chat; 
+export default Chat;

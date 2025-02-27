@@ -24,20 +24,16 @@ export const Counter = () => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-4 p-4">
-      <h2 className="text-2xl font-bold">Counter: {count}</h2>
-      <div className="flex gap-4">
-        <button
-          onClick={handleDecrement}
-          className="rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600">
+    <div className='flex flex-col items-center gap-4 p-4'>
+      <h2 className='text-2xl font-bold'>Counter: {count}</h2>
+      <div className='flex gap-4'>
+        <button onClick={handleDecrement} className='rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600'>
           Decrease
         </button>
-        <button
-          onClick={handleIncrement}
-          className="rounded bg-green-500 px-4 py-2 text-white hover:bg-green-600">
+        <button onClick={handleIncrement} className='rounded bg-green-500 px-4 py-2 text-white hover:bg-green-600'>
           Increase
         </button>
       </div>
     </div>
   );
-}; 
+};

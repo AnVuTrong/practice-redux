@@ -24,4 +24,4 @@ export interface ChatSession {
   id: string;
   messages: Message[];
   agentId?: string;
-} 
+}

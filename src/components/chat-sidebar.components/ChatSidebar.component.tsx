@@ -12,14 +12,7 @@ interface ChatSidebarProps {
   isMobile: boolean;
 }
 
-export const ChatSidebar: React.FC<ChatSidebarProps> = ({
-  chatHistory,
-  activeChatId,
-  onChatSelect,
-  onChatDelete,
-  isOpen,
-  isMobile
-}) => {
+export const ChatSidebar: React.FC<ChatSidebarProps> = ({ chatHistory, activeChatId, onChatSelect, onChatDelete, isOpen, isMobile }) => {
   const sidebarClasses = `
     ${isMobile ? 'fixed inset-y-0 left-0 w-full md:w-80 top-16' : 'relative w-80'} 
     ${isOpen ? 'translate-x-0' : '-translate-x-full'}
@@ -30,19 +23,12 @@ export const ChatSidebar: React.FC<ChatSidebarProps> = ({
 
   return (
     <div className={sidebarClasses}>
-      <div className="flex-none">
-        <ChatSidebarHeader 
-          chatCount={chatHistory.length} 
-        />
+      <div className='flex-none'>
+        <ChatSidebarHeader chatCount={chatHistory.length} />
       </div>
-      <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-secondary-dark scrollbar-track-transparent hover:scrollbar-thumb-primary/50 transition-colors">
-        <ChatHistoryList 
-          chatHistory={chatHistory}
-          activeChatId={activeChatId}
-          onChatSelect={onChatSelect}
-          onChatDelete={onChatDelete}
-        />
+      <div className='flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-secondary-dark scrollbar-track-transparent hover:scrollbar-thumb-primary/50 transition-colors'>
+        <ChatHistoryList chatHistory={chatHistory} activeChatId={activeChatId} onChatSelect={onChatSelect} onChatDelete={onChatDelete} />
       </div>
     </div>
   );
-}; 
+};

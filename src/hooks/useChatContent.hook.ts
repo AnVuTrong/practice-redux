@@ -6,14 +6,12 @@ import { Message } from '../types/chat.types';
 
 export const useChatContent = (activeChatId: string | null) => {
   const dispatch = useAppDispatch();
-  const activeChat = useAppSelector(state => 
-    activeChatId ? state.chat.chatSessions[activeChatId] : null
-  );
+  const activeChat = useAppSelector((state) => (activeChatId ? state.chat.chatSessions[activeChatId] : null));
 
   // Get the agent name for the active chat
   const agentName = useMemo(() => {
     if (!activeChat?.agentId) return null;
-    const agent = AI_AGENTS.find(agent => agent.id === activeChat.agentId);
+    const agent = AI_AGENTS.find((agent) => agent.id === activeChat.agentId);
     return agent?.name || null;
   }, [activeChat?.agentId]);
 
@@ -46,4 +44,4 @@ export const useChatContent = (activeChatId: string | null) => {
     agentName,
     handleSendMessage
   };
-}; 
+};

@@ -13,4 +13,4 @@ export const useMobileDetect = (breakpoint: number = 768): boolean => {
   }, [breakpoint]);
 
   return isMobile;
-}; 
+};

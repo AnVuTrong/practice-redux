@@ -2,7 +2,7 @@ import { Document } from '../types/references.types';
 
 // Mock data for references
 const MOCK_REFERENCES: Record<string, Document[]> = {
-  'default': [
+  default: [
     {
       id: 'doc1',
       title: 'Quy chế đào tạo UEH 2023',
@@ -68,7 +68,7 @@ Quy định chung:
 
 Lịch thi chi tiết được cập nhật trên website của trường và gửi đến email sinh viên.`,
       relevanceScore: 45
-    },
+    }
   ]
 };
 
@@ -76,4 +76,4 @@ export const getReferencesForMessage = (messageId: string): Document[] => {
   // In a real application, you would fetch references based on the messageId
   // For this mock, we'll return the default references
   return MOCK_REFERENCES['default'] || [];
-}; 
+};

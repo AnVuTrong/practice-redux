@@ -19,4 +19,4 @@ export const AI_AGENTS: AIAgent[] = [
     description: 'Helps with administrative tasks',
     avatar: '📊'
   }
-]; 
+];

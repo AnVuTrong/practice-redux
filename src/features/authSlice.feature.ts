@@ -24,8 +24,8 @@ const initialState: AuthState = {
 // Mock API functions (replace with real API calls in production)
 const mockSignIn = async (credentials: { email: string; password: string }) => {
   // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, 800));
-  
+  await new Promise((resolve) => setTimeout(resolve, 800));
+
   // Mock validation
   if (credentials.email === 'admin@promete.ai' && credentials.password === '111111') {
     return {
@@ -41,25 +41,19 @@ const mockSignIn = async (credentials: { email: string; password: string }) => {
       token: 'mock-jwt-token'
     };
   }
-  
+
   throw new Error('Invalid credentials');
 };
 
-const mockSignUp = async (userData: { 
-  name: string; 
-  email: string; 
-  password: string;
-  firstName?: string;
-  lastName?: string;
-}) => {
+const mockSignUp = async (userData: { name: string; email: string; password: string; firstName?: string; lastName?: string }) => {
   // Simulate API delay
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
   // Mock validation - in a real app, check if email already exists
   if (userData.email === 'admin@promete.ai') {
     throw new Error('Email already in use');
   }
-  
+
   // Create a new user
   return {
     user: {
@@ -76,30 +70,30 @@ const mockSignUp = async (userData: {
 };
 
 // Async thunks
-export const signIn = createAsyncThunk(
-  'auth/signIn',
-  async (credentials: { email: string; password: string }, { rejectWithValue }) => {
-    try {
-      const response = await mockSignIn(credentials);
-      // Store token in localStorage for persistence
-      localStorage.setItem('token', response.token);
-      localStorage.setItem('user', JSON.stringify(response.user));
-      return response;
-    } catch (error) {
-      return rejectWithValue(error instanceof Error ? error.message : 'Failed to sign in');
-    }
+export const signIn = createAsyncThunk('auth/signIn', async (credentials: { email: string; password: string }, { rejectWithValue }) => {
+  try {
+    const response = await mockSignIn(credentials);
+    // Store token in localStorage for persistence
+    localStorage.setItem('token', response.token);
+    localStorage.setItem('user', JSON.stringify(response.user));
+    return response;
+  } catch (error) {
+    return rejectWithValue(error instanceof Error ? error.message : 'Failed to sign in');
   }
-);
+});
 
 export const signUp = createAsyncThunk(
   'auth/signUp',
-  async (userData: { 
-    name: string; 
-    email: string; 
-    password: string;
-    firstName?: string;
-    lastName?: string;
-  }, { rejectWithValue }) => {
+  async (
+    userData: {
+      name: string;
+      email: string;
+      password: string;
+      firstName?: string;
+      lastName?: string;
+    },
+    { rejectWithValue }
+  ) => {
     try {
       const response = await mockSignUp(userData);
       // Store token in localStorage for persistence
@@ -112,15 +106,12 @@ export const signUp = createAsyncThunk(
   }
 );
 
-export const signOut = createAsyncThunk(
-  'auth/signOut',
-  async () => {
-    // Remove token and user from localStorage
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    return null;
-  }
-);
+export const signOut = createAsyncThunk('auth/signOut', async () => {
+  // Remove token and user from localStorage
+  localStorage.removeItem('token');
+  localStorage.removeItem('user');
+  return null;
+});
 
 // Create the auth slice
 export const authSlice = createSlice({
@@ -181,4 +172,4 @@ export const authSlice = createSlice({
 });
 
 export const { clearError, clearSuccessMessage } = authSlice.actions;
-export default authSlice.reducer; 
+export default authSlice.reducer;
