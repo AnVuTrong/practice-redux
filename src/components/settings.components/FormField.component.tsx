@@ -25,11 +25,11 @@ export const FormField: React.FC<FormFieldProps> = ({
   disabled = false,
   maxLength,
   helpText,
-  className = '',
+  className = ''
 }) => {
   return (
     <div className={`mb-4 ${className}`}>
-      <label htmlFor={id} className="block text-sm font-medium text-gray-700 mb-1">
+      <label htmlFor={id} className='block text-sm font-medium text-gray-700 mb-1'>
         {label}
       </label>
       <input
@@ -44,7 +44,7 @@ export const FormField: React.FC<FormFieldProps> = ({
         className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
           ${disabled ? 'bg-gray-100 cursor-not-allowed' : ''}`}
       />
-      {helpText && <p className="text-xs text-gray-500 mt-1">{helpText}</p>}
+      {helpText && <p className='text-xs text-gray-500 mt-1'>{helpText}</p>}
     </div>
   );
-}; 
+};

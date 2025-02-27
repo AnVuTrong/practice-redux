@@ -1,20 +1,16 @@
 import React from 'react';
 
 interface FormSectionProps {
-  title: string;
+  title?: string;
   children: React.ReactNode;
   className?: string;
 }
 
-export const FormSection: React.FC<FormSectionProps> = ({ 
-  title, 
-  children, 
-  className = '' 
-}) => {
+export const FormSection: React.FC<FormSectionProps> = ({ title = '', children, className = '' }) => {
   return (
     <div className={`mb-6 ${className}`}>
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">{title}</h2>
+      {title && <h2 className='text-xl font-semibold text-gray-800 mb-4'>{title}</h2>}
       {children}
     </div>
   );
-}; 
+};
