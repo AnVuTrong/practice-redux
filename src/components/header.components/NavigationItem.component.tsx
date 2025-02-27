@@ -20,7 +20,7 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
   return (
     <Link 
       to={path} 
-      className={`flex items-center gap-2 px-4 py-2 rounded transition-colors text-sm font-regular
+      className={`flex items-center gap-2 px-4 py-2.5 rounded transition-colors text-sm font-regular
         ${!isFirst && !isMobile ? 'ml-1' : ''}
         ${isMobile ? 'w-full' : ''}
         ${isActive 

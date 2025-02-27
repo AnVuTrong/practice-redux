@@ -55,8 +55,8 @@ export const chatSlice = createSlice({
     addNewChatWithAgent: (state, action: PayloadAction<{agent: AIAgent}>) => {
       const newChat: ChatHistory = {
         id: Date.now().toString(),
-        title: `New Chat with ${action.payload.agent.name}`,
-        preview: 'Start a new conversation...',
+        title: `${action.payload.agent.name}`,
+        preview: 'Start a new conversation on the top right corner of the sidebar...',
         timestamp: new Date().toISOString(),
         agentId: action.payload.agent.id
       };

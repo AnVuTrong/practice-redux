@@ -26,7 +26,7 @@ const Chat = () => {
   };
 
   return (
-    <div className="flex h-[calc(100vh-8rem)] relative">
+    <div className="flex flex-1 w-full">
       <ChatSidebar
         chatHistory={chatHistory}
         activeChatId={activeChatId}

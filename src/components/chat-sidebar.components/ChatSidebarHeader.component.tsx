@@ -17,7 +17,7 @@ export const ChatSidebarHeader: React.FC<ChatSidebarHeaderProps> = ({
   };
 
   return (
-    <div className="flex justify-between items-center border-b m-5 pb-2 border-secondary relative">
+    <div className="flex justify-between items-center border-b mx-5 mt-5 pb-2 border-secondary relative">
       <h1  className="text-text-primary font-bold text-sm flex items-center p-1 my-auto justify-between">
         Lịch sử chat 
         <span className="ml-1.5 bg-secondary-dark text-text-secondary rounded-full w-5 h-5 flex items-center justify-center text-xs">

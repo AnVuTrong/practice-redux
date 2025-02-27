@@ -30,7 +30,7 @@ export const ChatSidebar: React.FC<ChatSidebarProps> = ({
 
   return (
     <div className={sidebarClasses}>
-      <div className="flex-none">
+      <div>
         <ChatSidebarHeader 
           chatCount={chatHistory.length} 
         />

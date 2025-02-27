@@ -19,17 +19,19 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, disabled })
 
   return (
     <form onSubmit={handleSubmit} className="border-t border-secondary p-4">
-      <div className="flex items-center gap-2">
+      <div className="relative flex items-center">
         <input
           type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder={disabled ? 'Chọn một cuộc trò chuyện để bắt đầu...' : 'Nhập tin nhắn của bạn...'}
           disabled={disabled}
-          className="flex-1 p-2 rounded-lg border border-secondary bg-background-primary
+          className="w-full p-3 pr-16 rounded-lg border border-secondary bg-background-primary
             focus:outline-none focus:border-primary disabled:bg-secondary/30"
         />
-        <SendButton disabled={disabled || !message.trim()} />
+        <div className="absolute right-3">
+          <SendButton disabled={disabled || !message.trim()} />
+        </div>
       </div>
     </form>
   );

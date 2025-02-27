@@ -28,8 +28,8 @@ export const ChatHistoryItem: React.FC<ChatHistoryItemProps> = ({
       <div className="w-full text-left p-5 hover:bg-secondary/50 transition-colors duration-200">
         <div className="flex justify-between items-start relative">
           <div className="flex-1 min-w-0">
-            <h1 className="font-bold text-primary truncate">{chat.title}</h1>
-            <p className="text-sm text-text-secondary truncate mt-1">{chat.preview}</p>
+            <h1 className="font-bold truncate mr-10">{chat.title}</h1>
+            <p className="text-sm text-text-secondary line-clamp-1 mt-1">{chat.preview}</p>
           </div>
           <button
             onClick={handleDelete}
@@ -42,7 +42,7 @@ export const ChatHistoryItem: React.FC<ChatHistoryItemProps> = ({
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-3 h-3"
+              className="w-4 h-4"
             >
               <path
                 strokeLinecap="round"
