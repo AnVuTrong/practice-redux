@@ -4,6 +4,10 @@ import { ChatMessage } from '../chat-content.components/ChatMessage.component';
 import { ChatInput } from '../chat-content.components/ChatInput.component';
 import { addMessage } from '../../features/chatSlice.feature';
 import { AI_AGENTS } from '../../constants/Agents.constant';
+import { useChatContent } from '../../hooks/useChatContent.hook';
+import { ChatHeader } from './ChatHeader.component';
+import { ChatMessageList } from './ChatMessageList.component';
+import { Message } from '../../types/chat.types';
 
 interface ChatContentProps {
   activeChatId: string | null;
@@ -18,86 +22,22 @@ export const ChatContent: React.FC<ChatContentProps> = ({
   isSidebarOpen,
   isMobile
 }) => {
-  const dispatch = useAppDispatch();
-  const activeChat = useAppSelector(state => 
-    activeChatId ? state.chat.chatSessions[activeChatId] : null
-  );
-
-  // Get the agent name for the active chat
-  const agentName = React.useMemo(() => {
-    if (!activeChat?.agentId) return null;
-    const agent = AI_AGENTS.find(agent => agent.id === activeChat.agentId);
-    return agent?.name;
-  }, [activeChat?.agentId]);
-
-  const handleSendMessage = (content: string) => {
-    if (!activeChatId) return;
-
-    const userMessage = {
-      id: Date.now().toString(),
-      content,
-      sender: 'user' as const,
-      timestamp: new Date().toISOString()
-    };
-
-    dispatch(addMessage({ chatId: activeChatId, message: userMessage }));
-
-    // Simulate bot response
-    setTimeout(() => {
-      const botMessage = {
-        id: (Date.now() + 1).toString(),
-        content: 'This is a simulated bot response.',
-        sender: 'bot' as const,
-        timestamp: new Date().toISOString()
-      };
-      dispatch(addMessage({ chatId: activeChatId, message: botMessage }));
-    }, 1000);
-  };
+  const { activeChat, agentName, handleSendMessage } = useChatContent(activeChatId);
 
   return (
     <div className="flex-1 flex flex-col h-full">
-      <div className="flex-none p-4 border-b border-secondary">
-        {isMobile && (
-          <button
-            onClick={onToggleSidebar}
-            className="mr-4 p-2 hover:bg-secondary rounded-lg transition-colors"
-            aria-label={isSidebarOpen ? "Close sidebar" : "Open sidebar"}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d={isSidebarOpen 
-                  ? "M6 18L18 6M6 6l12 12"
-                  : "M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"
-                }
-              />
-            </svg>
-          </button>
-        )}
-        <h1 className="text-xl font-bold text-primary">
-          {activeChatId 
-            ? (agentName || 'Unknown Agent') 
-            : 'Chọn hoặc bắt đầu một cuộc trò chuyện mới'}
-        </h1>
-      </div>
+      {/* <ChatHeader 
+        agentName={agentName || null} 
+        activeChatId={activeChatId}
+        isMobile={isMobile}
+        isSidebarOpen={isSidebarOpen}
+        onToggleSidebar={onToggleSidebar}
+      /> */}
 
-      <div className="flex-1 p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-secondary-dark scrollbar-track-transparent hover:scrollbar-thumb-primary/50 transition-colors">
-        {activeChat?.messages.map(message => (
-          <ChatMessage 
-            key={message.id} 
-            message={message} 
-            chatId={activeChatId as string} 
-          />
-        ))}
-      </div>
+      <ChatMessageList 
+        messages={activeChat?.messages || []} 
+        chatId={activeChatId}
+      />
 
       <div className="flex-none">
         <ChatInput 
