@@ -86,6 +86,22 @@ export const chatSlice = createSlice({
       if (state.activeChatId === action.payload) {
         state.activeChatId = null;
       }
+    },
+    updateMessage: (state, action: PayloadAction<{ chatId: string; messageId: string; content: string }>) => {
+      const { chatId, messageId, content } = action.payload;
+      
+      if (state.chatSessions[chatId]) {
+        const message = state.chatSessions[chatId].messages.find(msg => msg.id === messageId);
+        if (message) {
+          message.content = content;
+          
+          // If this is the first message in the chat, update the preview as well
+          const chatHistoryItem = state.chatHistory.find(chat => chat.id === chatId);
+          if (chatHistoryItem && state.chatSessions[chatId].messages[0]?.id === messageId) {
+            chatHistoryItem.preview = content;
+          }
+        }
+      }
     }
   }
 });
@@ -99,6 +115,7 @@ export const {
   addNewChat, 
   addNewChatWithAgent, 
   deleteChat,
-  addMessage
+  addMessage,
+  updateMessage
 } = chatSlice.actions;
 export default chatSlice.reducer; 

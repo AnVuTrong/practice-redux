@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
 import { Message } from '../../types/chat.types';
-import { ActionButton } from './ActionButton.component';
 import { MessageActions } from './MessageActions.component';
+import { EditableMessage } from './EditableMessage.component';
+import { useAppDispatch } from '../../hooks/redux.hook';
+import { updateMessage } from '../../features/chatSlice.feature';
 
 interface ChatMessageProps {
   message: Message;
+  chatId: string;
 }
 
-export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
+export const ChatMessage: React.FC<ChatMessageProps> = ({ message, chatId }) => {
+  const dispatch = useAppDispatch();
   const isBot = message.sender === 'bot';
+  const [isEditing, setIsEditing] = useState(false);
   
   const handleCopyContent = () => {
     navigator.clipboard.writeText(message.content)
@@ -21,16 +26,47 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
       });
   };
   
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+  
+  const handleSaveEdit = (newContent: string) => {
+    dispatch(updateMessage({
+      chatId,
+      messageId: message.id,
+      content: newContent
+    }));
+    setIsEditing(false);
+  };
+  
+  const handleCancelEdit = () => {
+    setIsEditing(false);
+  };
+  
   return (
     <div className={`flex ${isBot ? 'justify-start' : 'justify-end'} mb-4`}>
       <div className={`max-w-[70%] rounded-lg p-4 relative
         ${isBot ? 'bg-secondary text-text-primary' : 'bg-primary text-white'}`}>
-        <p className="text-sm">{message.content}</p>
-        <span className="text-xs opacity-70 mt-1 block">
-          {new Date(message.timestamp).toLocaleTimeString()}
-        </span>
         
-        {isBot && <MessageActions onCopy={handleCopyContent} />}
+        <EditableMessage 
+          content={message.content}
+          isEditing={isEditing && isBot}
+          onSave={handleSaveEdit}
+          onCancel={handleCancelEdit}
+        />
+        
+        {!isEditing && (
+          <span className="text-xs opacity-70 mt-1 block">
+            {new Date(message.timestamp).toLocaleTimeString()}
+          </span>
+        )}
+        
+        {isBot && !isEditing && (
+          <MessageActions 
+            onCopy={handleCopyContent} 
+            onEdit={handleEditClick} 
+          />
+        )}
       </div>
     </div>
   );
