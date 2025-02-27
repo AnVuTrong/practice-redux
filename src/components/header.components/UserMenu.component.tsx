@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import { useAppSelector } from '../../hooks/redux.hook';
-import { Link } from 'react-router-dom';
+import { useAppSelector, useAppDispatch } from '../../hooks/redux.hook';
+import { Link, useNavigate } from 'react-router-dom';
+import { signOut } from '../../features/authSlice.feature';
+import { clearUser } from '../../features/userSlice.feature';
 
 export const UserMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { currentUser } = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   // Default values if user is not available
   const userInitial = currentUser?.avatar || 'G';
@@ -12,6 +16,24 @@ export const UserMenu = () => {
 
   const handleMenuItemClick = () => {
     setIsOpen(false);
+  };
+
+  const handleSignOut = async () => {
+    try {
+      // Dispatch the signOut action from authSlice
+      await dispatch(signOut()).unwrap();
+      
+      // Also clear the user state
+      dispatch(clearUser());
+      
+      // Close the menu
+      setIsOpen(false);
+      
+      // Redirect to sign in page
+      navigate('/signin');
+    } catch (error) {
+      console.error('Failed to sign out:', error);
+    }
   };
 
   return (
@@ -32,9 +54,11 @@ export const UserMenu = () => {
             <Link to='/settings' className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100' onClick={handleMenuItemClick}>
               Cài đặt tài khoản
             </Link>
-            <a href='#' className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'>
+            <button 
+              onClick={handleSignOut}
+              className='block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'>
               Đăng xuất
-            </a>
+            </button>
           </div>
         </div>
       )}
