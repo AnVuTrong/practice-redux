@@ -34,17 +34,17 @@ export const ChatContent: React.FC<ChatContentProps> = ({
         onToggleSidebar={onToggleSidebar}
       /> */}
 
-      <ChatMessageList 
-        messages={activeChat?.messages || []} 
-        chatId={activeChatId}
-      />
-
-      <div className="flex-none">
-        <ChatInput 
-          onSendMessage={handleSendMessage}
-          disabled={!activeChatId}
+      <div className="flex-1 overflow-y-auto">
+        <ChatMessageList 
+          messages={activeChat?.messages || []} 
+          chatId={activeChatId}
         />
       </div>
+
+      <ChatInput 
+        onSendMessage={handleSendMessage}
+        disabled={!activeChatId}
+      />
     </div>
   );
 }; 
