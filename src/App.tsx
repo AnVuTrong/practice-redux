@@ -4,15 +4,18 @@ import { Router } from './routers/Router';
 import { MainLayout } from './layouts/MainLayout.layout';
 import { Provider } from 'react-redux';
 import { store } from './stores/store.store';
+import { UserProvider } from './contexts/UserProvider';
 
 function App() {
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <MainLayout>
-          <Router />
-        </MainLayout>
-      </BrowserRouter>
+      <UserProvider>
+        <BrowserRouter>
+          <MainLayout>
+            <Router />
+          </MainLayout>
+        </BrowserRouter>
+      </UserProvider>
     </Provider>
   );
 }

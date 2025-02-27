@@ -16,6 +16,9 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message, chatId }) => 
   const isBot = message.sender === 'bot';
   const [isEditing, setIsEditing] = useState(false);
   
+  // Get the current user
+  const { currentUser } = useAppSelector(state => state.user);
+  
   // Get the agent information for the current chat
   const chatSession = useAppSelector(state => state.chat.chatSessions[chatId]);
   const agentId = chatSession?.agentId;
@@ -73,9 +76,9 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message, chatId }) => 
         {!isBot && (
           <div className="flex items-center mb-2">
             <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center mr-2">
-              <span className="text-xs text-bold text-white">A</span>
+              <span className="text-xs text-bold text-white">{currentUser?.avatar || 'U'}</span>
             </div>
-            <span className="text-sm font-bold">You</span>
+            <span className="text-sm font-bold">{currentUser?.name || 'You'}</span>
           </div>
         )}
 

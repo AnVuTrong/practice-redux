@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
+import { useAppSelector } from '../../hooks/redux.hook';
 
 export const UserMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { currentUser } = useAppSelector(state => state.user);
+  
+  // Default values if user is not available
+  const userInitial = currentUser?.avatar || 'G';
+  const userName = currentUser?.name || 'Guest';
 
   return (
     <div className="relative">
@@ -10,9 +16,9 @@ export const UserMenu = () => {
         className="flex items-center gap-2 p-2 rounded-lg hover:bg-secondary transition-colors"
       >
         <div className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center">
-          <span className="text-sm">A</span>
+          <span className="text-sm">{userInitial}</span>
         </div>
-        <p className="text-sm font-bold text-text-primary">Admin</p>
+        <p className="text-sm font-bold text-text-primary">{userName}</p>
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
           fill="none" 
