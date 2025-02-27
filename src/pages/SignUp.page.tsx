@@ -5,14 +5,13 @@ import { AuthCard } from '../components/auth.components/AuthCard.component';
 import { TermsCheckbox } from '../components/auth.components/TermsCheckbox.component';
 import { SignInLink } from '../components/auth.components/SignInLink.component';
 import { useSignUpForm } from '../hooks/useSignUpForm.hook';
+import { AuthLayout } from '../layouts/AuthLayout.layout';
 
 const SignUp: React.FC = () => {
   const { formData, formErrors, loading, error, handleChange, handleSubmit } = useSignUpForm();
 
   return (
-    <div className='min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 p-4'>
-      <div className='absolute top-0 right-0 w-full h-64 bg-gradient-to-l from-primary/20 to-purple-500/20 -z-10'></div>
-
+    <AuthLayout>
       <AuthCard title='Create Account' subtitle='Join us today and start your journey'>
         {error && (
           <div className='mb-4 p-3 bg-red-50 border-l-4 border-red-500 text-red-700 rounded'>
@@ -100,7 +99,7 @@ const SignUp: React.FC = () => {
 
         <SignInLink />
       </AuthCard>
-    </div>
+    </AuthLayout>
   );
 };
 

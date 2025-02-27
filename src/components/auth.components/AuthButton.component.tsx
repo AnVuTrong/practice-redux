@@ -20,7 +20,7 @@ export const AuthButton: React.FC<AuthButtonProps> = ({
   const baseClasses = 'px-6 py-2 rounded-lg font-medium transition-all duration-200 flex items-center justify-center';
 
   const variantClasses = {
-    primary: 'bg-gradient-to-r from-primary to-purple-600 text-white hover:from-primary-light hover:to-purple-500',
+    primary: 'bg-gradient-to-r from-primary to-highlight-orange text-white hover:from-primary-light hover:to-purple-500',
     secondary: 'bg-secondary text-primary hover:bg-secondary-dark',
     outline: 'border border-primary text-primary hover:bg-primary/10'
   };
