@@ -29,7 +29,9 @@ export const ChatHistoryItem: React.FC<ChatHistoryItemProps> = ({
         <div className="flex justify-between items-start relative">
           <div className="flex-1 min-w-0">
             <h1 className="font-bold truncate mr-10">{chat.title}</h1>
-            <p className="text-sm text-text-secondary line-clamp-1 mt-1">{chat.preview}</p>
+            <p className="text-sm text-text-secondary line-clamp-1 mt-1">
+              {chat.preview || 'No messages yet'}
+            </p>
           </div>
           <button
             onClick={handleDelete}

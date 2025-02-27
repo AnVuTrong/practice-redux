@@ -51,12 +51,21 @@ export const chatSlice = createSlice({
         };
       }
       state.chatSessions[action.payload.chatId].messages.push(action.payload.message);
+      
+      // Update the chat history preview with the latest message content
+      const chatHistoryItem = state.chatHistory.find(chat => chat.id === action.payload.chatId);
+      if (chatHistoryItem) {
+        // If it's a user message, update the preview
+        if (action.payload.message.sender === 'user') {
+          chatHistoryItem.preview = action.payload.message.content;
+        }
+      }
     },
     addNewChatWithAgent: (state, action: PayloadAction<{agent: AIAgent}>) => {
       const newChat: ChatHistory = {
         id: Date.now().toString(),
         title: `${action.payload.agent.name}`,
-        preview: 'Start a new conversation on the top right corner of the sidebar...',
+        preview: 'New conversation started. Please start chatting...',
         timestamp: new Date().toISOString(),
         agentId: action.payload.agent.id
       };
