@@ -1,117 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
-import { signUp, clearError } from '../features/authSlice.feature';
+import React from 'react';
 import { FormInput } from '../components/auth.components/FormInput.component';
 import { AuthButton } from '../components/auth.components/AuthButton.component';
 import { AuthCard } from '../components/auth.components/AuthCard.component';
+import { TermsCheckbox } from '../components/auth.components/TermsCheckbox.component';
+import { SignInLink } from '../components/auth.components/SignInLink.component';
+import { useSignUpForm } from '../hooks/useSignUpForm.hook';
 
-const SignUp = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-  });
-
-  const [formErrors, setFormErrors] = useState({
-    name: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-  });
-
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const { loading, error, isAuthenticated, successMessage } = useAppSelector((state) => state.auth);
-
-  useEffect(() => {
-    // Clear any previous errors when component mounts
-    dispatch(clearError());
-  }, [dispatch]);
-
-  useEffect(() => {
-    // Redirect if already authenticated
-    if (isAuthenticated && successMessage) {
-      navigate('/');
-    }
-  }, [isAuthenticated, successMessage, navigate]);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-
-    // Clear field error when user types
-    if (formErrors[name as keyof typeof formErrors]) {
-      setFormErrors({
-        ...formErrors,
-        [name]: ''
-      });
-    }
-  };
-
-  const validateForm = () => {
-    let valid = true;
-    const newErrors = { ...formErrors };
-
-    // Name validation
-    if (!formData.name.trim()) {
-      newErrors.name = 'Full name is required';
-      valid = false;
-    } else {
-      newErrors.name = '';
-    }
-
-    // Email validation
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-      valid = false;
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid';
-      valid = false;
-    } else {
-      newErrors.email = '';
-    }
-
-    // Password validation
-    if (!formData.password) {
-      newErrors.password = 'Password is required';
-      valid = false;
-    } else if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
-      valid = false;
-    } else {
-      newErrors.password = '';
-    }
-
-    // Confirm password validation
-    if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Passwords do not match';
-      valid = false;
-    } else {
-      newErrors.confirmPassword = '';
-    }
-
-    setFormErrors(newErrors);
-    return valid;
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (validateForm()) {
-      // Remove confirmPassword before sending to API
-      const { confirmPassword, ...signUpData } = formData;
-      dispatch(signUp(signUpData));
-    }
-  };
+const SignUp: React.FC = () => {
+  const { formData, formErrors, loading, error, handleChange, handleSubmit } = useSignUpForm();
 
   return (
     <div className='min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 p-4'>
@@ -197,31 +93,12 @@ const SignUp = () => {
             autoComplete='new-password'
           />
 
-          <div className='flex items-center mt-4'>
-            <input id='terms' name='terms' type='checkbox' className='h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded' required />
-            <label htmlFor='terms' className='ml-2 block text-sm text-gray-700'>
-              I agree to the{' '}
-              <a href='#' className='text-primary hover:text-primary-light'>
-                Terms of Service
-              </a>{' '}
-              and{' '}
-              <a href='#' className='text-primary hover:text-primary-light'>
-                Privacy Policy
-              </a>
-            </label>
-          </div>
+          <TermsCheckbox />
 
           <AuthButton text='Create Account' type='submit' isLoading={loading} fullWidth />
         </form>
 
-        <div className='mt-6 text-center'>
-          <p className='text-sm text-gray-600'>
-            Already have an account?{' '}
-            <Link to='/signin' className='text-primary font-medium hover:text-primary-light'>
-              Sign in
-            </Link>
-          </p>
-        </div>
+        <SignInLink />
       </AuthCard>
     </div>
   );
