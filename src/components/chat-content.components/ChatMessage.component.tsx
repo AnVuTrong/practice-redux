@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { Message } from '../../types/chat.types';
 import { MessageActions } from './MessageActions.component';
 import { EditableMessage } from './EditableMessage.component';
@@ -75,10 +76,12 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message, chatId }) => 
         {/* User Avatar (shown only for user messages and inside the message box) */}
         {!isBot && (
           <div className="flex items-center mb-2">
-            <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center mr-2">
-              <span className="text-xs text-bold text-white">{currentUser?.avatar || 'U'}</span>
-            </div>
-            <span className="text-sm font-bold">{currentUser?.name || 'You'}</span>
+            <Link to="/settings" className="flex items-center hover:opacity-80 transition-opacity">
+              <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center mr-2">
+                <span className="text-xs text-bold text-white">{currentUser?.avatar || 'U'}</span>
+              </div>
+              <span className="text-sm font-bold">{currentUser?.name || 'You'}</span>
+            </Link>
           </div>
         )}
 

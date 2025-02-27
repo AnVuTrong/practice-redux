@@ -3,6 +3,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export interface User {
   id: string;
   name: string;
+  firstName?: string;
+  lastName?: string;
   avatar: string;
   email?: string;
   role: 'admin' | 'user' | 'guest';
@@ -18,6 +20,8 @@ const initialState: UserState = {
   currentUser: {
     id: '1',
     name: 'Admin',
+    firstName: 'Admin',
+    lastName: '',
     avatar: 'A',
     email: 'admin@example.com',
     role: 'admin'
@@ -41,6 +45,9 @@ export const userSlice = createSlice({
     updateUserProfile: (state, action: PayloadAction<Partial<User>>) => {
       if (state.currentUser) {
         state.currentUser = { ...state.currentUser, ...action.payload };
+        
+        // Save to localStorage for persistence
+        localStorage.setItem('user', JSON.stringify(state.currentUser));
       }
     },
     setLoading: (state, action: PayloadAction<boolean>) => {

@@ -10,10 +10,11 @@ const TodoTest = lazy(() => import('../pages/TodoTest.page'));
 const Chat = lazy(() => import('../pages/Chat.page'));
 const Agents = lazy(() => import('../pages/Agents.page'));
 const FileManager = lazy(() => import('../pages/FileManager.page'));
+const Settings = lazy(() => import('../pages/Settings.page'));
 
 export const Router = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div className="flex items-center justify-center h-full">Loading...</div>}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -22,6 +23,7 @@ export const Router = () => {
         <Route path="/chat" element={<Chat />} />
         <Route path="/agents" element={<Agents />} />
         <Route path="/file-manager" element={<FileManager />} />
+        <Route path="/settings" element={<Settings />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>

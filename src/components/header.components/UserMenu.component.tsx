@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAppSelector } from '../../hooks/redux.hook';
+import { Link } from 'react-router-dom';
 
 export const UserMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,6 +9,10 @@ export const UserMenu = () => {
   // Default values if user is not available
   const userInitial = currentUser?.avatar || 'G';
   const userName = currentUser?.name || 'Guest';
+
+  const handleMenuItemClick = () => {
+    setIsOpen(false);
+  };
 
   return (
     <div className="relative">
@@ -32,11 +37,16 @@ export const UserMenu = () => {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+        <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
           <div className="py-1">
-            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Your Profile</a>
-            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
-            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign out</a>
+            <Link 
+              to="/settings" 
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              onClick={handleMenuItemClick}
+            >
+              Cài đặt tài khoản
+            </Link>
+            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Đăng xuất</a>
           </div>
         </div>
       )}

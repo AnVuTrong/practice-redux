@@ -6,4 +6,5 @@ export const ROUTES = {
   CHAT: '/chat',
   AGENTS: '/agents',
   FILE_MANAGER: '/file-manager',
+  SETTINGS: '/settings',
 } as const; 
