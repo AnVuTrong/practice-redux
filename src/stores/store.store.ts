@@ -3,13 +3,15 @@ import counterReducer from '../features/counterSlice.feature';
 import todoReducer from '../features/todoSlice.feature';
 import chatReducer from '../features/chatSlice.feature';
 import userReducer from '../features/userSlice.feature';
+import authReducer from '../features/authSlice.feature';
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
     todo: todoReducer,
     chat: chatReducer,
-    user: userReducer
+    user: userReducer,
+    auth: authReducer
   }
 });
 
