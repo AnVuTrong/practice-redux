@@ -1,11 +1,15 @@
 import React from 'react';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import client from './apollo/client.apollo';
+
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+
 import { Router } from './routers/Router';
 import { MainLayout } from './layouts/MainLayout.layout';
 import { Provider } from 'react-redux';
 import { store } from './stores/Store.store';
 import { UserProvider } from './contexts/UserProvider';
+
 import SignIn from './pages/SignIn.page';
 import SignUp from './pages/SignUp.page';
 
@@ -31,11 +35,6 @@ const AppLayout = () => {
 };
 
 function App() {
-  const client = new ApolloClient({
-    uri: 'https://graphql-learning-backend.onrender.com/graphql',
-    cache: new InMemoryCache()
-  });
-
   return (
     <Provider store={store}>
       <UserProvider>
