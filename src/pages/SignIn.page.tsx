@@ -5,7 +5,7 @@ import { AuthCard } from '../components/auth.components/AuthCard.component';
 import { SocialLoginButtons } from '../components/auth.components/SocialLoginButtons.component';
 import { RememberForgotSection } from '../components/auth.components/RememberForgotSection.component';
 import { SignUpLink } from '../components/auth.components/SignUpLink.component';
-import { useSignInForm } from '../hooks/useSignInForm.hook';
+import { useSignInForm } from '../hooks/UseSignInForm.hook';
 import { AuthLayout } from '../layouts/AuthLayout.layout';
 
 const SignIn: React.FC = () => {

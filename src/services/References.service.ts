@@ -1,4 +1,4 @@
-import { Document } from '../types/references.types';
+import { Document } from '../types/References.types';
 
 // Mock data for references
 const MOCK_REFERENCES: Record<string, Document[]> = {

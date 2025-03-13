@@ -1,6 +1,6 @@
 import React from 'react';
-import { useAppDispatch } from '../../hooks/redux.hook';
-import { toggleAgentSelector } from '../../features/chatSlice.feature';
+import { useAppDispatch } from '../../hooks/Redux.hook';
+import { toggleAgentSelector } from '../../features/ChatSlice.feature';
 import { AgentSelector } from './AgentSelector.component';
 
 interface ChatSidebarHeaderProps {

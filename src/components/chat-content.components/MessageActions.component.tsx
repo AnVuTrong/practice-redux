@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ActionButton } from './ActionButton.component';
 import { ReferencesModal } from './ReferencesModal.component';
-import { getReferencesForMessage } from '../../services/references.service';
+import { getReferencesForMessage } from '../../services/References.service';
 import { createMessageActions } from '../../constants/MessageActions.constant';
 
 interface MessageActionsProps {

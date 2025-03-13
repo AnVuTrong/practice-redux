@@ -1,8 +1,8 @@
 import React from 'react';
-import { AIAgent } from '../../types/chat.types';
+import { AIAgent } from '../../types/Chat.types';
 import { AI_AGENTS } from '../../constants/Agents.constant';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux.hook';
-import { addNewChatWithAgent, toggleAgentSelector } from '../../features/chatSlice.feature';
+import { useAppDispatch, useAppSelector } from '../../hooks/Redux.hook';
+import { addNewChatWithAgent, toggleAgentSelector } from '../../features/ChatSlice.feature';
 
 export const AgentSelector: React.FC = () => {
   const dispatch = useAppDispatch();

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChatHistory } from '../../types/chat.types';
+import { ChatHistory } from '../../types/Chat.types';
 
 interface ChatHistoryItemProps {
   chat: ChatHistory;

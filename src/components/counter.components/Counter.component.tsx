@@ -1,6 +1,6 @@
-import { useAppDispatch, useAppSelector } from '../../hooks/redux.hook';
-import { increment, decrement } from '../../features/counterSlice.feature';
-import { sleep } from '../../utils/sleep.util';
+import { useAppDispatch, useAppSelector } from '../../hooks/Redux.hook';
+import { increment, decrement } from '../../features/CounterSlice.feature';
+import { sleep } from '../../utils/Sleep.util';
 
 export const Counter = () => {
   const count = useAppSelector((state) => {

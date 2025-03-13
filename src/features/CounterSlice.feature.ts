@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { sleep } from '../utils/sleep.util';
+import { sleep } from '../utils/Sleep.util';
 
 interface CounterState {
   value: number;

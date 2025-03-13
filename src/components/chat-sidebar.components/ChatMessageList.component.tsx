@@ -1,6 +1,6 @@
 import React from 'react';
 import { ChatMessage } from '../chat-content.components/ChatMessage.component';
-import { Message } from '../../types/chat.types';
+import { Message } from '../../types/Chat.types';
 
 interface ChatMessageListProps {
   messages: Message[];

@@ -1,13 +1,13 @@
 import React from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux.hook';
+import { useAppDispatch, useAppSelector } from '../../hooks/Redux.hook';
 import { ChatMessage } from '../chat-content.components/ChatMessage.component';
 import { ChatInput } from '../chat-content.components/ChatInput.component';
-import { addMessage } from '../../features/chatSlice.feature';
+import { addMessage } from '../../features/ChatSlice.feature';
 import { AI_AGENTS } from '../../constants/Agents.constant';
-import { useChatContent } from '../../hooks/useChatContent.hook';
+import { useChatContent } from '../../hooks/UseChatContent.hook';
 import { ChatHeader } from './ChatHeader.component';
 import { ChatMessageList } from './ChatMessageList.component';
-import { Message } from '../../types/chat.types';
+import { Message } from '../../types/Chat.types';
 
 interface ChatContentProps {
   activeChatId: string | null;

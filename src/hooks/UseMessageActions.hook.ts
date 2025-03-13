@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useAppDispatch } from './redux.hook';
-import { updateMessage } from '../features/chatSlice.feature';
+import { useAppDispatch } from './Redux.hook';
+import { updateMessage } from '../features/ChatSlice.feature';
 
 export const useMessageActions = (chatId: string, messageId: string) => {
   const dispatch = useAppDispatch();

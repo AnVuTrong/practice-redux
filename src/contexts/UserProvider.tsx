@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { useAppDispatch } from '../hooks/redux.hook';
-import { setUser, setLoading } from '../features/userSlice.feature';
+import { useAppDispatch } from '../hooks/Redux.hook';
+import { setUser, setLoading } from '../features/UserSlice.feature';
 
 interface UserProviderProps {
   children: React.ReactNode;

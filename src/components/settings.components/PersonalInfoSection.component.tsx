@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormField } from './FormField.component';
 import { FormSection } from './FormSection.component';
-import { User } from '../../features/userSlice.feature';
+import { User } from '../../features/UserSlice.feature';
 
 interface PersonalInfoSectionProps {
   formData: {

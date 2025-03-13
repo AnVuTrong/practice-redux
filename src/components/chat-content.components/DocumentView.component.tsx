@@ -1,5 +1,5 @@
 import React from 'react';
-import { Document } from '../../types/document.types';
+import { Document } from '../../types/Document.types';
 import { ProgressBar } from '../common/ProgressBar.component';
 
 interface DocumentViewProps {

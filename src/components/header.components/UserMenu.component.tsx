@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useAppSelector, useAppDispatch } from '../../hooks/redux.hook';
+import { useAppSelector, useAppDispatch } from '../../hooks/Redux.hook';
 import { Link, useNavigate } from 'react-router-dom';
-import { signOut } from '../../features/authSlice.feature';
-import { clearUser } from '../../features/userSlice.feature';
+import { signOut } from '../../features/AuthSlice.feature';
+import { clearUser } from '../../features/UserSlice.feature';
 
 export const UserMenu = () => {
   const [isOpen, setIsOpen] = useState(false);

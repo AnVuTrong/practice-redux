@@ -1,9 +1,9 @@
 import React from 'react';
 import { ChatSidebar } from '../components/chat-sidebar.components/ChatSidebar.component';
 import { ChatContent } from '../components/chat-sidebar.components/ChatContent.component';
-import { useMobileDetect } from '../hooks/useMobileDetect.hook';
-import { useAppDispatch, useAppSelector } from '../hooks/redux.hook';
-import { setActiveChatId, toggleSidebar, deleteChat } from '../features/chatSlice.feature';
+import { useMobileDetect } from '../hooks/UseMobileDetect.hook';
+import { useAppDispatch, useAppSelector } from '../hooks/Redux.hook';
+import { setActiveChatId, toggleSidebar, deleteChat } from '../features/ChatSlice.feature';
 
 const Chat = () => {
   const dispatch = useAppDispatch();

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { NavigationItem as NavigationItemType } from '../../types/navigation.types';
+import { NavigationItem as NavigationItemType } from '../../types/Navigation.types';
 
 interface NavigationItemProps extends NavigationItemType {
   isFirst?: boolean;

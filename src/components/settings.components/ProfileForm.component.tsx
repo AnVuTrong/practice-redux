@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { useAppDispatch } from '../../hooks/redux.hook';
-import { updateUserProfile, User } from '../../features/userSlice.feature';
+import { useAppDispatch } from '../../hooks/Redux.hook';
+import { updateUserProfile, User } from '../../features/UserSlice.feature';
 import { PersonalInfoSection } from './PersonalInfoSection.component';
 import { FormActions } from './FormActions.component';
 import { SuccessMessage } from './SuccessMessage.component';

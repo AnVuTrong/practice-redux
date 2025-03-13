@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ChatHistory, ChatSession, Message, AIAgent } from '../types/chat.types';
+import { ChatHistory, ChatSession, Message, AIAgent } from '../types/Chat.types';
 import { AI_AGENTS } from '../constants/Agents.constant';
 
 interface ChatState {

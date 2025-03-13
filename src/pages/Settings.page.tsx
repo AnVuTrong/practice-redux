@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppSelector } from '../hooks/redux.hook';
+import { useAppSelector } from '../hooks/Redux.hook';
 import { ProfileForm } from '../components/settings.components/ProfileForm.component';
 import { SettingsSidebar } from '../components/settings.components/SettingsSidebar.component';
 

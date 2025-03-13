@@ -1,4 +1,4 @@
-import { ChatHistory } from '../types/chat.types';
+import { ChatHistory } from '../types/Chat.types';
 
 export const MOCK_CHAT_HISTORY: ChatHistory[] = [
   {

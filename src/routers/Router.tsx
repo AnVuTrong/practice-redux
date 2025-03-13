@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { lazy, Suspense, ReactNode } from 'react';
-import { useAppSelector } from '../hooks/redux.hook';
+import { useAppSelector } from '../hooks/Redux.hook';
 
 // Lazy load components
 const Home = lazy(() => import('../pages/Home.page'));

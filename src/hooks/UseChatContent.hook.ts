@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
-import { useAppDispatch, useAppSelector } from './redux.hook';
-import { addMessage } from '../features/chatSlice.feature';
+import { useAppDispatch, useAppSelector } from './Redux.hook';
+import { addMessage } from '../features/ChatSlice.feature';
 import { AI_AGENTS } from '../constants/Agents.constant';
-import { Message } from '../types/chat.types';
+import { Message } from '../types/Chat.types';
 
 export const useChatContent = (activeChatId: string | null) => {
   const dispatch = useAppDispatch();

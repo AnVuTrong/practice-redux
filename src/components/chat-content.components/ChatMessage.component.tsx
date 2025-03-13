@@ -1,13 +1,13 @@
 import React from 'react';
-import { Message } from '../../types/chat.types';
+import { Message } from '../../types/Chat.types';
 import { MessageActions } from './MessageActions.component';
 import { EditableMessage } from './EditableMessage.component';
-import { useAppSelector } from '../../hooks/redux.hook';
+import { useAppSelector } from '../../hooks/Redux.hook';
 import { AI_AGENTS } from '../../constants/Agents.constant';
 import { MessageContainer } from './MessageContainer.component';
 import { MessageAvatar } from './MessageAvatar.component';
 import { MessageTimestamp } from './MessageTimestamp.component';
-import { useMessageActions } from '../../hooks/useMessageActions.hook';
+import { useMessageActions } from '../../hooks/UseMessageActions.hook';
 
 interface ChatMessageProps {
   message: Message;

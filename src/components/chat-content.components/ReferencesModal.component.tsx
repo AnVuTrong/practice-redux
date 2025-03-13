@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Document } from '../../types/document.types';
+import { Document } from '../../types/Document.types';
 import { Modal } from '../common/Modal.component';
 import { DocumentView } from './DocumentView.component';
 import { Pagination } from '../common/Pagination.component';

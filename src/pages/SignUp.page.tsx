@@ -4,7 +4,7 @@ import { AuthButton } from '../components/auth.components/AuthButton.component';
 import { AuthCard } from '../components/auth.components/AuthCard.component';
 import { TermsCheckbox } from '../components/auth.components/TermsCheckbox.component';
 import { SignInLink } from '../components/auth.components/SignInLink.component';
-import { useSignUpForm } from '../hooks/useSignUpForm.hook';
+import { useSignUpForm } from '../hooks/UseSignUpForm.hook';
 import { AuthLayout } from '../layouts/AuthLayout.layout';
 
 const SignUp: React.FC = () => {

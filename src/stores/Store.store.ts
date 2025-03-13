@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counterSlice.feature';
-import todoReducer from '../features/todoSlice.feature';
-import chatReducer from '../features/chatSlice.feature';
-import userReducer from '../features/userSlice.feature';
-import authReducer from '../features/authSlice.feature';
+import counterReducer from '../features/CounterSlice.feature';
+import todoReducer from '../features/TodoSlice.feature';
+import chatReducer from '../features/ChatSlice.feature';
+import userReducer from '../features/UserSlice.feature';
+import authReducer from '../features/AuthSlice.feature';
 
 export const store = configureStore({
   reducer: {

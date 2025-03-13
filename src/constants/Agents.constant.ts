@@ -1,4 +1,4 @@
-import { AIAgent } from '../types/chat.types';
+import { AIAgent } from '../types/Chat.types';
 
 export const AI_AGENTS: AIAgent[] = [
   {
