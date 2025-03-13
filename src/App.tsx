@@ -1,6 +1,6 @@
 import React from 'react';
 import { ApolloProvider } from '@apollo/client';
-import client from './apollo/client.apollo';
+import client from './backend/apollo/client.apollo';
 
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 

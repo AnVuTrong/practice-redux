@@ -1,33 +1,68 @@
-import { Stock, StockFilterInput, StocksResponse } from '../types/Stock.types';
-import { StockService } from '../services/Stock.service';
+import { Collection } from 'mongodb';
 
-// Create a service instance
-const stockService = new StockService();
+interface Context {
+  stockCollection: Collection;
+}
+
+interface StockByCodeArgs {
+  code: string;
+}
+
+interface StocksByIndustryArgs {
+  industry: string;
+}
+
+interface StocksByMarketCapArgs {
+  minMarketCap: number;
+}
+
+interface StocksByAuditorArgs {
+  auditor: string;
+  year?: number;
+}
 
 export const stockResolvers = {
-  Query: {
-    stocks: async (_: any, { page = 1, limit = 10, filter }: { page: number, limit: number, filter?: StockFilterInput }): Promise<StocksResponse> => {
-      return await stockService.getStocks(page, limit, filter);
+    Query: {
+      allStocks: async (_: any, __: any, { stockCollection }: Context) => {
+        return await stockCollection.find({}).toArray();
+      },
+      
+      stockByCode: async (_: any, { code }: StockByCodeArgs, { stockCollection }: Context) => {
+        return await stockCollection.findOne({ code });
+      },
+      
+      stocksByIndustry: async (_: any, { industry }: StocksByIndustryArgs, { stockCollection }: Context) => {
+        return await stockCollection.find({
+          $or: [
+            { industry_level1: industry },
+            { industry_level2: industry },
+            { industry_level3: industry },
+            { industry_level4: industry }
+          ]
+        }).toArray();
+      },
+      
+      stocksByMarketCap: async (_: any, { minMarketCap }: StocksByMarketCapArgs, { stockCollection }: Context) => {
+        return await stockCollection.find({
+          market_cap: { $gte: minMarketCap }
+        }).toArray();
+      },
+      
+      stocksByAuditor: async (_: any, { auditor, year }: StocksByAuditorArgs, { stockCollection }: Context) => {
+        const query: any = {
+          "accounting_firm": {
+            $elemMatch: { "donvikiemtoan": auditor }
+          }
+        };
+        
+        if (year) {
+          query.accounting_firm.$elemMatch.nam = year;
+        }
+        
+        return await stockCollection.find(query).toArray();
+      }
     },
-    
-    stockByCode: async (_: any, { code }: { code: string }): Promise<Stock | null> => {
-      return await stockService.getStockByCode(code);
-    },
-    
-    stocksByIndustry: async (_: any, { industry }: { industry: string }): Promise<Stock[]> => {
-      return await stockService.getStocksByIndustry(industry);
-    },
-    
-    exchanges: async (): Promise<string[]> => {
-      return await stockService.getExchanges();
-    },
-    
-    industries: async (): Promise<string[]> => {
-      return await stockService.getIndustries();
+    Mutation: {
+      // Implement mutation resolvers here
     }
-  },
-  
-  Mutation: {
-    // Add mutations if needed
-  }
-}; 
+  };
