@@ -1,5 +1,5 @@
 import React from 'react';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client';
 import client from './apollo/client.apollo';
 
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
