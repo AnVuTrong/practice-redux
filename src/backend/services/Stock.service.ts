@@ -8,7 +8,7 @@ export class StockService {
   
   constructor() {
     // MongoDB connection string - should be in environment variables in production
-    const uri = 'mongodb://localhost:27017';
+    const uri = 'mongodb://promete:promete1secure2password3@localhost:27018/?directConnection=true';
     this.client = new MongoClient(uri);
     this.connect();
   }
