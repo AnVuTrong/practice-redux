@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useLazyQuery, gql } from '@apollo/client';
-import QueryEditor from './playground/QueryEditor.component';
-import VariablesEditor from './playground/VariablesEditor.component';
-import QueryResult from './playground/QueryResult.component';
-import SampleQueries from './playground/SampleQueries.component';
+import QueryEditor from './playground.components/QueryEditor.component';
+import VariablesEditor from './playground.components/VariablesEditor.component';
+import QueryResult from './playground.components/QueryResult.component';
+import SampleQueries from './playground.components/SampleQueries.component';
 
 const GraphQLPlayground: React.FC = () => {
   const [query, setQuery] = useState(`{
