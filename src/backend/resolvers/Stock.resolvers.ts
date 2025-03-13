@@ -80,6 +80,31 @@ export const stockResolvers = {
       stocks: async (_: any, { page, limit, filter = {} }: StocksArgs, { stockCollection }: Context): Promise<StocksResult> => {
         const query: any = {};
         
+        if (filter.exchange) {
+          if (filter.exchange === 'Exchange không xác định') {
+            query.$or = [
+              { exchange: { $exists: false } },
+              { exchange: null },
+              { exchange: "" }
+            ];
+          } else {
+            query.exchange = filter.exchange;
+          }
+        }
+        
+        if (filter.search) {
+          const searchRegex = { $regex: filter.search, $options: 'i' };
+          if (!query.$or) {
+            query.$or = [];
+          }
+          query.$or = [
+            { code: searchRegex },
+            { fullname_vi: searchRegex }
+          ];
+        }
+        
+        console.log("MongoDB Query:", JSON.stringify(query, null, 2));
+        
         const totalCount = await stockCollection.countDocuments(query);
         
         const stocks = await stockCollection
@@ -113,7 +138,7 @@ export const stockResolvers = {
           
           // Nếu có cổ phiếu không có exchange, thêm danh mục "OTHER"
           if (missingExchangeCount > 0) {
-            validExchanges.push("OTHER");
+            validExchanges.push("Exchange không xác định");
           }
           
           return validExchanges;
