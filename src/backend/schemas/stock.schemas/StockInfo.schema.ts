@@ -40,6 +40,19 @@ export const stockTypeDefs = gql`
     website: String
   }
   
+  # Add this new type for the paginated stocks response
+  type StocksResponse {
+    totalCount: Int!
+    stocks: [StockInfo]!
+  }
+  
+  # Add this input type for filtering stocks
+  input StockFilterInput {
+    exchange: String
+    industry: String
+    search: String
+  }
+  
   type Query {
     # Get all stocks
     allStocks: [StockInfo]
@@ -55,5 +68,8 @@ export const stockTypeDefs = gql`
     
     # Get stocks with accounting firm in a specific year
     stocksByAuditor(auditor: String!, year: Int): [StockInfo]
+    
+    # Add the new paginated and filtered stocks query
+    stocks(page: Int!, limit: Int!, filter: StockFilterInput): StocksResponse!
   }
 `;

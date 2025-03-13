@@ -21,6 +21,21 @@ interface StocksByAuditorArgs {
   year?: number;
 }
 
+interface StocksArgs {
+  page: number;
+  limit: number;
+  filter?: {
+    exchange?: string;
+    industry?: string;
+    search?: string;
+  };
+}
+
+interface StocksResult {
+  totalCount: number;
+  stocks: any[];
+}
+
 export const stockResolvers = {
     Query: {
       allStocks: async (_: any, __: any, { stockCollection }: Context) => {
@@ -60,6 +75,43 @@ export const stockResolvers = {
         }
         
         return await stockCollection.find(query).toArray();
+      },
+      
+      stocks: async (_: any, { page, limit, filter = {} }: StocksArgs, { stockCollection }: Context): Promise<StocksResult> => {
+        const query: any = {};
+        
+        if (filter.exchange) {
+          query.exchange = filter.exchange;
+        }
+        
+        if (filter.industry) {
+          query.$or = [
+            { industry_level1: filter.industry },
+            { industry_level2: filter.industry },
+            { industry_level3: filter.industry },
+            { industry_level4: filter.industry }
+          ];
+        }
+        
+        if (filter.search) {
+          query.$or = [
+            { code: { $regex: filter.search, $options: 'i' } },
+            { fullname_vi: { $regex: filter.search, $options: 'i' } }
+          ];
+        }
+        
+        const totalCount = await stockCollection.countDocuments(query);
+        
+        const stocks = await stockCollection
+          .find(query)
+          .skip((page - 1) * limit)
+          .limit(limit)
+          .toArray();
+        
+        return {
+          totalCount,
+          stocks
+        };
       }
     },
     Mutation: {

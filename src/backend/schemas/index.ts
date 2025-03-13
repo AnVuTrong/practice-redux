@@ -1,5 +1,5 @@
 import { gql } from 'apollo-server-express';
-import { stockTypeDefs } from './Stock.schemas';
+import { stockTypeDefs } from './stock.schemas/StockInfo.schema';
 
 // Base type definitions
 const baseTypeDefs = gql`

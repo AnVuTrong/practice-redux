@@ -5,11 +5,11 @@ import StockExplorerContent from './StockExplorerContent.component';
 
 // GraphQL queries
 const GET_STOCKS = gql`
-  query GetStocks($page: Int, $limit: Int, $filter: StockFilterInput) {
+  query GetStocks($page: Int!, $limit: Int!, $filter: StockFilterInput) {
     stocks(page: $page, limit: $limit, filter: $filter) {
       totalCount
       stocks {
-        id
+        _id
         code
         fullname_vi
         exchange
@@ -35,11 +35,12 @@ const StockExplorerContainer: React.FC = () => {
     variables: {
       page,
       limit,
-      filter: {
-        exchange: filters.exchange || undefined,
-        industry: filters.industry || undefined,
-        search: filters.search || undefined
-      }
+      filter: {}
+    },
+    onError: (error) => {
+      console.error('GraphQL Error:', error);
+      console.error('GraphQL Error Details:', error.graphQLErrors);
+      console.error('Network Error:', error.networkError);
     }
   });
 
@@ -65,6 +66,10 @@ const StockExplorerContainer: React.FC = () => {
         filters={filters}
         onFilterChange={handleFilterChange}
       />
+
+      <div className='grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6'>
+        <hr className="border-t border-gray-200 my-4 col-span-full" />
+      </div>
       
       <StockExplorerContent 
         loading={loading}
