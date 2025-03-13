@@ -71,5 +71,9 @@ export const stockTypeDefs = gql`
     
     # Add the new paginated and filtered stocks query
     stocks(page: Int!, limit: Int!, filter: StockFilterInput): StocksResponse!
+    
+    # Add filters for the explorer
+    allExchanges: [String!]!
+    allIndustries: [String!]!
   }
 `;

@@ -2,7 +2,7 @@ import React from 'react';
 import { ApolloError } from '@apollo/client';
 
 interface Stock {
-  id: string;
+  _id: string;
   code: string;
   fullname_vi: string;
   exchange: string;
@@ -73,7 +73,7 @@ export const StockList: React.FC<StockListProps> = ({
           <tbody className="bg-white divide-y divide-gray-200">
             {stocks.map((stock) => (
               <tr 
-                key={stock.id} 
+                key={stock._id || stock.code} 
                 onClick={() => onSelectStock(stock.code)}
                 className={`cursor-pointer hover:bg-gray-50 ${
                   selectedStock === stock.code ? 'bg-blue-50' : ''

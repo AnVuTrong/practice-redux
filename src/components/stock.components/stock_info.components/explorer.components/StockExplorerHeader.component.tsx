@@ -5,19 +5,19 @@ import { StockFilters } from '../StockFilters.component';
 interface StockExplorerHeaderProps {
   filters: {
     exchange: string;
-    industry: string;
     search: string;
   };
   onFilterChange: (filters: {
     exchange: string;
-    industry: string;
     search: string;
   }) => void;
+  exchanges: string[];
 }
 
 const StockExplorerHeader: React.FC<StockExplorerHeaderProps> = ({ 
   filters, 
-  onFilterChange 
+  onFilterChange,
+  exchanges
 }) => {
   return (
     <>
@@ -32,6 +32,7 @@ const StockExplorerHeader: React.FC<StockExplorerHeaderProps> = ({
       <StockFilters 
         filters={filters}
         onChange={onFilterChange}
+        exchanges={exchanges}
       />
     </>
   );

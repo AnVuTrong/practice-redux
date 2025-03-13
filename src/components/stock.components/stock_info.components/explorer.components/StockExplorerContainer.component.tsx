@@ -20,13 +20,33 @@ const GET_STOCKS = gql`
   }
 `;
 
-const StockExplorerContainer: React.FC = () => {
+// Comment out these queries for now
+/*
+const GET_EXCHANGES = gql`
+  query GetExchanges {
+    allExchanges
+  }
+`;
+
+const GET_INDUSTRIES = gql`
+  query GetIndustries {
+    allIndustries
+  }
+`;
+*/
+
+interface StockExplorerContainerProps {
+  exchanges: string[];
+}
+
+const StockExplorerContainer: React.FC<StockExplorerContainerProps> = ({ 
+  exchanges
+}) => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [selectedStock, setSelectedStock] = useState<string | null>(null);
   const [filters, setFilters] = useState({
     exchange: '',
-    industry: '',
     search: ''
   });
 
@@ -35,7 +55,10 @@ const StockExplorerContainer: React.FC = () => {
     variables: {
       page,
       limit,
-      filter: {}
+      filter: {
+        exchange: filters.exchange || undefined,
+        search: filters.search || undefined
+      }
     },
     onError: (error) => {
       console.error('GraphQL Error:', error);
@@ -43,6 +66,15 @@ const StockExplorerContainer: React.FC = () => {
       console.error('Network Error:', error.networkError);
     }
   });
+
+  // Comment out these useQuery calls
+  /*
+  const { data: exchangesData } = useQuery(GET_EXCHANGES);
+  const { data: industriesData } = useQuery(GET_INDUSTRIES);
+  
+  const exchanges = exchangesData?.allExchanges || [];
+  const industries = industriesData?.allIndustries || [];
+  */
 
   // Handle pagination
   const handlePageChange = (newPage: number) => {
@@ -65,6 +97,7 @@ const StockExplorerContainer: React.FC = () => {
       <StockExplorerHeader 
         filters={filters}
         onFilterChange={handleFilterChange}
+        exchanges={exchanges}
       />
 
       <div className='grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6'>

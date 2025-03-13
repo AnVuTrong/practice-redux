@@ -80,26 +80,6 @@ export const stockResolvers = {
       stocks: async (_: any, { page, limit, filter = {} }: StocksArgs, { stockCollection }: Context): Promise<StocksResult> => {
         const query: any = {};
         
-        if (filter.exchange) {
-          query.exchange = filter.exchange;
-        }
-        
-        if (filter.industry) {
-          query.$or = [
-            { industry_level1: filter.industry },
-            { industry_level2: filter.industry },
-            { industry_level3: filter.industry },
-            { industry_level4: filter.industry }
-          ];
-        }
-        
-        if (filter.search) {
-          query.$or = [
-            { code: { $regex: filter.search, $options: 'i' } },
-            { fullname_vi: { $regex: filter.search, $options: 'i' } }
-          ];
-        }
-        
         const totalCount = await stockCollection.countDocuments(query);
         
         const stocks = await stockCollection
@@ -112,7 +92,56 @@ export const stockResolvers = {
           totalCount,
           stocks
         };
-      }
+      },
+      
+      allExchanges: async (_: any, __: any, { stockCollection }: Context) => {
+        try {
+          // Lấy tất cả các giá trị exchange khác nhau từ database
+          const exchanges = await stockCollection.distinct("exchange");
+          
+          // Lọc ra các giá trị hợp lệ
+          const validExchanges = exchanges.filter(e => e !== null && e !== undefined && e !== "");
+          
+          // Đếm số lượng cổ phiếu không có giá trị exchange
+          const missingExchangeCount = await stockCollection.countDocuments({
+            $or: [
+              { exchange: { $exists: false } },
+              { exchange: null },
+              { exchange: "" }
+            ]
+          });
+          
+          // Nếu có cổ phiếu không có exchange, thêm danh mục "OTHER"
+          if (missingExchangeCount > 0) {
+            validExchanges.push("OTHER");
+          }
+          
+          return validExchanges;
+        } catch (error) {
+          console.error('Error in allExchanges resolver:', error);
+          return []; 
+        }
+      },
+      
+      allIndustries: async (_: any, __: any, { stockCollection }: Context) => {
+        try {
+          // Get distinct industries from all levels
+          const level1 = await stockCollection.distinct("industry_level1");
+          const level2 = await stockCollection.distinct("industry_level2");
+          const level3 = await stockCollection.distinct("industry_level3");
+          const level4 = await stockCollection.distinct("industry_level4");
+          
+          // Combine all levels and remove duplicates
+          const allIndustries = [...level1, ...level2, ...level3, ...level4]
+            .filter(Boolean) // Remove null/undefined/empty values
+            .filter((value, index, self) => self.indexOf(value) === index); // Remove duplicates
+          
+          return allIndustries;
+        } catch (error) {
+          console.error('Error in allIndustries resolver:', error);
+          return [];
+        }
+      },
     },
     Mutation: {
       // Implement mutation resolvers here
