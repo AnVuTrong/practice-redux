@@ -4,20 +4,35 @@ import { useQuery, gql } from '@apollo/client';
 const GET_STOCK_DETAILS = gql`
   query GetStockDetails($code: String!) {
     stockByCode(code: $code) {
-      id
+      _id
       code
       fullname_vi
+      fullname_en
       exchange
       industry_level1
       industry_level2
+      industry_level3
+      industry_level4
       market_cap
-      volume
-      pe
-      pb
-      dividend_yield
-      roe
-      roa
+      volume_daily
+      volume_15_days_average
+      diff
+      diff_percent
+      total_shares_outstanding
+      total_shares_listed
+      treasury_stock
+      listing_date
+      website
+      address
       description
+      firm_category
+      firm_category_string
+      accounting_firm {
+        nam
+        donvikiemtoan
+      }
+      fetch_time
+      fetch_url
     }
   }
 `;
@@ -50,6 +65,7 @@ export const StockDetails: React.FC<StockDetailsProps> = ({ stockCode }) => {
   }
 
   if (error) {
+    console.error('GraphQL error details:', error);
     return (
       <div className="bg-red-100 p-6 rounded-lg border border-red-300 h-full">
         <p className="text-red-700">Error loading stock details: {error.message}</p>
@@ -90,24 +106,26 @@ export const StockDetails: React.FC<StockDetailsProps> = ({ stockCode }) => {
           <p className="font-semibold">{stock.market_cap?.toLocaleString()} VND</p>
         </div>
         <div className="bg-gray-50 p-3 rounded">
-          <span className="text-gray-500 text-sm">Volume</span>
-          <p className="font-semibold">{stock.volume?.toLocaleString()}</p>
+          <span className="text-gray-500 text-sm">Volume Daily</span>
+          <p className="font-semibold">{stock.volume_daily?.toLocaleString()}</p>
         </div>
         <div className="bg-gray-50 p-3 rounded">
-          <span className="text-gray-500 text-sm">P/E Ratio</span>
-          <p className="font-semibold">{stock.pe?.toFixed(2) || 'N/A'}</p>
+          <span className="text-gray-500 text-sm">Avg Volume (15d)</span>
+          <p className="font-semibold">{stock.volume_15_days_average?.toLocaleString()}</p>
         </div>
         <div className="bg-gray-50 p-3 rounded">
-          <span className="text-gray-500 text-sm">P/B Ratio</span>
-          <p className="font-semibold">{stock.pb?.toFixed(2) || 'N/A'}</p>
+          <span className="text-gray-500 text-sm">Price Change</span>
+          <p className={`font-semibold ${stock.diff > 0 ? 'text-green-600' : stock.diff < 0 ? 'text-red-600' : ''}`}>
+            {stock.diff?.toLocaleString()} ({stock.diff_percent?.toFixed(2)}%)
+          </p>
         </div>
         <div className="bg-gray-50 p-3 rounded">
-          <span className="text-gray-500 text-sm">ROE</span>
-          <p className="font-semibold">{stock.roe ? `${(stock.roe * 100).toFixed(2)}%` : 'N/A'}</p>
+          <span className="text-gray-500 text-sm">Total Shares</span>
+          <p className="font-semibold">{stock.total_shares_outstanding?.toLocaleString()}</p>
         </div>
         <div className="bg-gray-50 p-3 rounded">
-          <span className="text-gray-500 text-sm">ROA</span>
-          <p className="font-semibold">{stock.roa ? `${(stock.roa * 100).toFixed(2)}%` : 'N/A'}</p>
+          <span className="text-gray-500 text-sm">Listed Shares</span>
+          <p className="font-semibold">{stock.total_shares_listed?.toLocaleString()}</p>
         </div>
       </div>
 
@@ -115,6 +133,22 @@ export const StockDetails: React.FC<StockDetailsProps> = ({ stockCode }) => {
         <div className="mt-6">
           <h4 className="font-medium mb-2">Description</h4>
           <p className="text-gray-700 text-sm">{stock.description}</p>
+        </div>
+      )}
+
+      {stock.website && (
+        <div className="mt-4">
+          <h4 className="font-medium mb-2">Website</h4>
+          <a href={stock.website} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline text-sm">
+            {stock.website}
+          </a>
+        </div>
+      )}
+
+      {stock.address && (
+        <div className="mt-4">
+          <h4 className="font-medium mb-2">Address</h4>
+          <p className="text-gray-700 text-sm">{stock.address}</p>
         </div>
       )}
     </div>
