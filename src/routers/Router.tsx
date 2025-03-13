@@ -12,6 +12,7 @@ const Chat = lazy(() => import('../pages/Chat.page'));
 const Agents = lazy(() => import('../pages/Agents.page'));
 const FileManager = lazy(() => import('../pages/FileManager.page'));
 const Settings = lazy(() => import('../pages/Settings.page'));
+const GraphQL = lazy(() => import('../pages/GraphQL.page'));
 
 // Protected route component
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {
@@ -90,6 +91,14 @@ export const Router = () => {
           element={
             <ProtectedRoute>
               <Settings />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/graphql'
+          element={
+            <ProtectedRoute>
+              <GraphQL />
             </ProtectedRoute>
           }
         />

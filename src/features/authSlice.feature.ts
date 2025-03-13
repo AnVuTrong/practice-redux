@@ -13,8 +13,8 @@ interface AuthState {
 
 // Initial state
 const initialState: AuthState = {
-  isAuthenticated: false,
-  user: null,
+  isAuthenticated: !!localStorage.getItem('token'),
+  user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') || '') : null,
   token: localStorage.getItem('token'),
   loading: false,
   error: null,
@@ -123,6 +123,16 @@ export const authSlice = createSlice({
     },
     clearSuccessMessage: (state) => {
       state.successMessage = null;
+    },
+    restoreAuthState: (state) => {
+      const token = localStorage.getItem('token');
+      const userStr = localStorage.getItem('user');
+      
+      if (token && userStr) {
+        state.isAuthenticated = true;
+        state.token = token;
+        state.user = JSON.parse(userStr);
+      }
     }
   },
   extraReducers: (builder) => {
