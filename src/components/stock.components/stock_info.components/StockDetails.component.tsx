@@ -107,11 +107,11 @@ export const StockDetails: React.FC<StockDetailsProps> = ({ stockCode }) => {
         </div>
         <div className="bg-gray-50 p-3 rounded">
           <span className="text-gray-500 text-sm">Volume Daily</span>
-          <p className="font-semibold">{stock.volume_daily?.toLocaleString()}</p>
+          <p className="font-semibold">{stock.volume_daily ? Math.round(stock.volume_daily).toLocaleString() : '-'}</p>
         </div>
         <div className="bg-gray-50 p-3 rounded">
           <span className="text-gray-500 text-sm">Avg Volume (15d)</span>
-          <p className="font-semibold">{stock.volume_15_days_average?.toLocaleString()}</p>
+          <p className="font-semibold">{stock.volume_15_days_average ? Math.round(stock.volume_15_days_average).toLocaleString() : '-'}</p>
         </div>
         <div className="bg-gray-50 p-3 rounded">
           <span className="text-gray-500 text-sm">Price Change</span>

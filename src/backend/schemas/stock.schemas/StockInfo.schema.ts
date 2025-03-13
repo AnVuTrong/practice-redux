@@ -31,12 +31,12 @@ export const stockTypeDefs = gql`
     note: String
     smg: Float
     total_assets: Float
-    total_shares_listed: Int
-    total_shares_outstanding: Int
-    treasury_stock: Int
+    total_shares_listed: Float
+    total_shares_outstanding: Float
+    treasury_stock: Float
     type: String
-    volume_15_days_average: Int
-    volume_daily: Int
+    volume_15_days_average: Float
+    volume_daily: Float
     website: String
   }
   
